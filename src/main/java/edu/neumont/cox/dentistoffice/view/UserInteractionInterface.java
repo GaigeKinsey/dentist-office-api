@@ -9,4 +9,8 @@ public interface UserInteractionInterface {
 	boolean checkPassword(String password);
 	
 	void passwordMismatch();
+	
+	void dentistOfficeGreeting();
+	
+	int dentistOfficeMenu();
 }

@@ -41,13 +41,14 @@ public class DentistController {
 			}
 		} while (!valid);
 		currentUser.changePassword(newPass);
+		mainMenu();
 	}
 
 	private void login() {
-
+		
 	}
 
 	private void mainMenu() {
-
+		userInteraction.dentistOfficeGreeting();
 	}
 }
