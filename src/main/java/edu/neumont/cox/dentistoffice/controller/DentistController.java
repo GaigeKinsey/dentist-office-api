@@ -5,7 +5,7 @@ import java.io.IOException;
 import edu.neumont.cox.dentistoffice.model.Clinic;
 import edu.neumont.cox.dentistoffice.model.User;
 import edu.neumont.cox.dentistoffice.view.UserInteractionInterface;
-import edu.neumont.kinsey.savabledatabase.SavableDatabase;
+import edu.neumont.dazley.savabledatabase.SavableDatabase;
 
 public class DentistController {
 	Clinic clinic;
