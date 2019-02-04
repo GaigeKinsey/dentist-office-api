@@ -13,4 +13,10 @@ public interface UserInteractionInterface {
 	void dentistOfficeGreeting();
 	
 	int dentistOfficeMenu();
+
+	String getUsername();
+
+	String getPassword();
+
+	void invalidUser();
 }

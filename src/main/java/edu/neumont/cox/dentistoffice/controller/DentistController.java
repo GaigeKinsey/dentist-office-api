@@ -1,6 +1,7 @@
 package edu.neumont.cox.dentistoffice.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import edu.neumont.cox.dentistoffice.model.Clinic;
 import edu.neumont.cox.dentistoffice.model.User;
@@ -45,7 +46,28 @@ public class DentistController {
 	}
 
 	private void login() {
-		
+		List<User> users = clinic.getUsers();
+		boolean checkUser = false;
+
+		do {
+
+			String username = userInteraction.getUsername();
+			String password = userInteraction.getPassword();
+
+			for (User user : users) {
+				if (user.getUsername().equals(username)) {
+					if (user.getPassword().equals(password)) {
+						currentUser = user;
+						checkUser = true;
+					}
+				}
+			}
+
+			if (!checkUser) {
+				userInteraction.invalidUser();
+			}
+
+		} while (!checkUser);
 	}
 
 	private void mainMenu() {
