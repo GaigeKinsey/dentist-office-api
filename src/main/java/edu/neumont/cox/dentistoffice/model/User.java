@@ -12,36 +12,44 @@ public class User {
 		this.role = role;
 	}
 	
-	public void changePasswordForUser(User user) {
+	public boolean changePasswordForUser(User user) {
+		boolean check = true;
 		if (this.getRole() == UserRole.Administrative) {
 			
 		} else {
-			
+			check = false;
 		}
+		return check;
 	}
 	
-	public void addUser(User user) {
+	public boolean addUser(User user) {
+		boolean check = true;
 		if (this.getRole() == UserRole.Administrative) {
 			
 		} else {
-			
+			check = false;
 		}
+		return check;
 	}
 	
-	public void removeUser(User user) {
+	public boolean removeUser(User user) {
+		boolean check = true;
 		if (this.getRole() == UserRole.Administrative) {
 			
 		} else {
-			
+			check = false;
 		}
+		return check;
 	}
 	
-	public void changeRole(User user, UserRole role) {
+	public boolean changeRole(User user, UserRole role) {
+		boolean check = true;
 		if (this.getRole() == UserRole.Administrative) {
 			
 		} else {
-
+			check = false;
 		}
+		return check;
 	}
 	
 	public void changePassword(String password) {
@@ -52,12 +60,14 @@ public class User {
 		return role;
 	}
 	
-	public void setRole(UserRole role) {
+	public boolean setRole(UserRole role) {
+		boolean check = true;
 		if (this.getRole() == UserRole.Administrative) {
 			this.role = role;
 		} else {
-			
+			check = false;
 		}
+		return check;
 	}
 
 	public String getUsername() {

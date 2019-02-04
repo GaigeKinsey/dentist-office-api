@@ -12,11 +12,11 @@ public class DentistController {
 	Clinic clinic = new Clinic();
 	UserInteractionInterface userInteraction;
 	User currentUser;
-	
+
 	public DentistController(UserInteractionInterface UI) {
 		this.userInteraction = UI;
 	}
-	
+
 	public void run() {
 		SavableDatabase database = new SavableDatabase();
 		try {
@@ -31,15 +31,23 @@ public class DentistController {
 	private void firstLogin() {
 		currentUser = new User("Administrator", "1234Password", UserRole.Administrative);
 		clinic.addUser(currentUser);
-		String newPass = userInteraction.adminPasswordChange();
+		String newPass = "";
+		boolean valid = false;
+		do {
+			newPass = userInteraction.adminPasswordChange();
+			valid = userInteraction.checkPassword(newPass);
+			if (!valid) {
+				userInteraction.passwordMismatch();
+			}
+		} while (!valid);
 		currentUser.changePassword(newPass);
 	}
 
 	private void login() {
-		
+
 	}
-	
+
 	private void mainMenu() {
-		
+
 	}
 }

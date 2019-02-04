@@ -4,4 +4,9 @@ public interface UserInteractionInterface {
 
 	String adminPasswordChange();
 
+	void noPermission();
+
+	boolean checkPassword(String password);
+	
+	void passwordMismatch();
 }
