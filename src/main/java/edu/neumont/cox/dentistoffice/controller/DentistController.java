@@ -86,9 +86,9 @@ public class DentistController {
 
 		// Add someone
 		case 3:
-			int selection1 = userInteraction.addSomeoneSubMenu();
+			int addSelection = userInteraction.addSomeoneSubMenu();
 
-			switch (selection1) {
+			switch (addSelection) {
 			case 1:
 				if (currentUser.getRole() == UserRole.Administrative) {
 					String username = userInteraction.getUsername();
@@ -106,6 +106,8 @@ public class DentistController {
 					
 					clinic.addUser(new User(username, password, firstName, lastName, role));
 					
+					mainMenu();
+					
 				} else {
 					userInteraction.noPermission();
 					mainMenu();
@@ -122,9 +124,9 @@ public class DentistController {
 		// Remove someone	
 		case 4:
 
-			int selection2 = userInteraction.removeSomeoneSubMenu();
+			int remSelection = userInteraction.removeSomeoneSubMenu();
 
-			switch (selection2) {
+			switch (remSelection) {
 			case 1:
 				if (currentUser.getRole() == UserRole.Administrative) {
 
@@ -145,6 +147,19 @@ public class DentistController {
 		
 		//Report	
 		case 5:	
+			int repSelection = userInteraction.reportsMenu();
+			
+			switch(repSelection) {
+			
+			//production
+			case 1:
+				
+			//Patient Balance	
+			case 2: 
+			
+			//Collections	
+			case 3:	
+			}
 
 		// Save
 		case 6:

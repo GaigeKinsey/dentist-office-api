@@ -23,6 +23,8 @@ public interface UserInteractionInterface {
 	int addSomeoneSubMenu();
 	
 	int removeSomeoneSubMenu();
+	
+	int reportsMenu();
 
 	int userRoleChoice();
 
