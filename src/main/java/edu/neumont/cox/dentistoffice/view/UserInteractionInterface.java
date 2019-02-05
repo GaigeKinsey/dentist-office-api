@@ -24,4 +24,9 @@ public interface UserInteractionInterface {
 	
 	int removeSomeoneSubMenu();
 
+	int userRoleChoice();
+
+	String getFirstName();
+
+	String getLastName();
 }

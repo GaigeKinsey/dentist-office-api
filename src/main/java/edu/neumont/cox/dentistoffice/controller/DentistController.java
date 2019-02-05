@@ -77,28 +77,50 @@ public class DentistController {
 		int choice = userInteraction.dentistOfficeMenu();
 
 		switch (choice) {
+		
+		// Search
+		case 1:
+			
+		//Schedule an appointment
+		case 2:	
 
 		// Add someone
-		case 2:
+		case 3:
 			int selection1 = userInteraction.addSomeoneSubMenu();
 
 			switch (selection1) {
 			case 1:
 				if (currentUser.getRole() == UserRole.Administrative) {
-
+					String username = userInteraction.getUsername();
+					String password = userInteraction.getPassword();
+					String firstName = userInteraction.getFirstName();
+					String lastName = userInteraction.getLastName();
+					UserRole role = null;
+					
+					int roleChoice = userInteraction.userRoleChoice();
+					if(roleChoice == 1) {
+						role = UserRole.Administrative;
+					} else {
+						role = UserRole.Standard;
+					}
+					
+					clinic.addUser(new User(username, password, firstName, lastName, role));
+					
 				} else {
 					userInteraction.noPermission();
 					mainMenu();
 				}
 
 			case 2:
+				
+			case 3:	
 
-			case 3:
+			case 4:
 				mainMenu();
 
 			}
-
-		case 3:
+		// Remove someone	
+		case 4:
 
 			int selection2 = userInteraction.removeSomeoneSubMenu();
 
@@ -106,20 +128,26 @@ public class DentistController {
 			case 1:
 				if (currentUser.getRole() == UserRole.Administrative) {
 
+
 				} else {
 					userInteraction.noPermission();
 					mainMenu();
 				}
 
 			case 2:
+				
+			case 3:		
 
-			case 3:
+			case 4:
 				mainMenu();
 
 			}
+		
+		//Report	
+		case 5:	
 
-			// Save
-		case 5:
+		// Save
+		case 6:
 			database.add(clinic);
 			try {
 				database.save();
