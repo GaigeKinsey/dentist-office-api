@@ -20,6 +20,8 @@ public class Clinic implements Serializable{
 //	private List<User> users = new ArrayList<>();
 	
 	Map<String, User> users = new HashMap<>();
+//	Map<String, Provider> providers = new HashMap<>();
+//	Map<String, Patient> patients = new HashMap<>();
 	
 	public List<Provider> getProviders() {
 		return providers;

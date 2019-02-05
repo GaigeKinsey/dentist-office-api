@@ -89,6 +89,7 @@ public class DentistController {
 			int addSelection = userInteraction.addSomeoneSubMenu();
 
 			switch (addSelection) {
+			//user
 			case 1:
 				if (currentUser.getRole() == UserRole.Administrative) {
 					String username = userInteraction.getUsername();
