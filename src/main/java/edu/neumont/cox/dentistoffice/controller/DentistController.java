@@ -10,16 +10,17 @@ import edu.neumont.cox.dentistoffice.view.UserInteractionInterface;
 import edu.neumont.cox.savabledatabase.SavableDatabase;
 
 public class DentistController {
-	Clinic clinic = new Clinic();
-	UserInteractionInterface userInteraction;
-	User currentUser;
+	private Clinic clinic = new Clinic();
+	private SavableDatabase database;
+	private UserInteractionInterface userInteraction;
+	private User currentUser;
 
 	public DentistController(UserInteractionInterface UI) {
 		this.userInteraction = UI;
 	}
 
 	public void run() {
-		SavableDatabase database = new SavableDatabase();
+		database = new SavableDatabase();
 		try {
 			database.load();
 			clinic = (Clinic) database.get(0);
@@ -30,7 +31,7 @@ public class DentistController {
 	}
 
 	private void firstLogin() {
-		currentUser = new User("Administrator", "1234Password", UserRole.Administrative);
+		currentUser = new User("Administrator", "1234Password", "Administrative", "User", UserRole.Administrative);
 		clinic.addUser(currentUser);
 		String newPass = "";
 		boolean valid = false;
@@ -50,7 +51,6 @@ public class DentistController {
 		boolean checkUser = false;
 
 		do {
-
 			String username = userInteraction.getUsername();
 			String password = userInteraction.getPassword();
 
@@ -62,15 +62,23 @@ public class DentistController {
 					}
 				}
 			}
-
 			if (!checkUser) {
 				userInteraction.invalidUser();
 			}
-
 		} while (!checkUser);
 	}
 
 	private void mainMenu() {
 		userInteraction.dentistOfficeGreeting();
+		int choice = userInteraction.dentistOfficeMenu();
+		
+		switch (choice) {
+		case 5:
+			try {
+				database.save();
+			} catch (IOException e) {
+				System.out.println("Shouldn't have happened.");
+			}
+		}
 	}
 }

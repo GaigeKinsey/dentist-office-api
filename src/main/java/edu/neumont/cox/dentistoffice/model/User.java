@@ -3,15 +3,19 @@ package edu.neumont.cox.dentistoffice.model;
 public class User {
 	private String username;
 	private String password;
+	private String firstName;
+	private String lastName;
 	private UserRole role;
 	
 
-	public User(String username, String password, UserRole role) {
+	public User(String username, String password, String firstName, String lastName, UserRole role) {
 		this.setUsername(username);
 		this.setPassword(password);
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
 		this.role = role;
 	}
-	
+
 	public boolean changePasswordForUser(User user) {
 		boolean check = true;
 		if (this.getRole() == UserRole.Administrative) {
@@ -84,5 +88,21 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 }
