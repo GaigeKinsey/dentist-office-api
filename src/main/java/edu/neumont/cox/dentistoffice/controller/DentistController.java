@@ -11,7 +11,7 @@ import edu.neumont.cox.savabledatabase.SavableDatabase;
 
 public class DentistController {
 	private Clinic clinic = new Clinic();
-	private SavableDatabase database;
+	private SavableDatabase database = new SavableDatabase();
 	private UserInteractionInterface userInteraction;
 	private User currentUser;
 
@@ -20,7 +20,6 @@ public class DentistController {
 	}
 
 	public void run() {
-		database = new SavableDatabase();
 		try {
 			database.load();
 			clinic = (Clinic) database.get(0);
@@ -66,6 +65,7 @@ public class DentistController {
 				userInteraction.invalidUser();
 			}
 		} while (!checkUser);
+		mainMenu();
 	}
 
 	private void mainMenu() {
@@ -74,11 +74,13 @@ public class DentistController {
 		
 		switch (choice) {
 		case 5:
+				database.add(clinic);
 			try {
 				database.save();
 			} catch (IOException e) {
-				System.out.println("Shouldn't have happened.");
+				e.printStackTrace();
 			}
+				database.clear();
 		}
 	}
 }
