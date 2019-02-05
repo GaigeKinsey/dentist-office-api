@@ -3,7 +3,9 @@ package edu.neumont.cox.dentistoffice.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Clinic implements Serializable{
 	/**
@@ -15,8 +17,9 @@ public class Clinic implements Serializable{
 	private List<Payment> payments = new ArrayList<>();
 	private List<Patient> patients = new ArrayList<>();
 	private List<Appointment> appointments = new ArrayList<>();
-	private List<User> users = new ArrayList<>();
-
+//	private List<User> users = new ArrayList<>();
+	
+	Map<String, User> users = new HashMap<>();
 	
 	public List<Provider> getProviders() {
 		return providers;
@@ -50,16 +53,16 @@ public class Clinic implements Serializable{
 		this.appointments = appointments;
 	}
 
-	public List<User> getUsers() {
+	public Map<String, User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<User> users) {
+	public void setUsers(Map<String, User> users) {
 		this.users = users;
 	}
 
 	public void addUser(User user) {
-		this.users.add(user);
+		this.users.put(user.getUsername(), user);
 	}
 	
 	public List<Appointment> getFutureAppointments(){

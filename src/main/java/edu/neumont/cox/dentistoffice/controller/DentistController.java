@@ -1,7 +1,6 @@
 package edu.neumont.cox.dentistoffice.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import edu.neumont.cox.dentistoffice.model.Clinic;
 import edu.neumont.cox.dentistoffice.model.User;
@@ -46,21 +45,26 @@ public class DentistController {
 	}
 
 	private void login() {
-		List<User> users = clinic.getUsers();
+//		List<User> users = clinic.getUsers();
 		boolean checkUser = false;
 
 		do {
 			String username = userInteraction.getUsername();
 			String password = userInteraction.getPassword();
-
-			for (User user : users) {
-				if (user.getUsername().equals(username)) {
-					if (user.getPassword().equals(password)) {
-						currentUser = user;
-						checkUser = true;
-					}
-				}
+			User user = clinic.getUsers().get(username);
+			if (user.getPassword().equals(password)) {
+				currentUser = user;
+				checkUser = true;
 			}
+
+//			for (User user : users) {
+//				if (user.getUsername().equals(username)) {
+//					if (user.getPassword().equals(password)) {
+//						currentUser = user;
+//						checkUser = true;
+//					}
+//				}
+//			}
 			if (!checkUser) {
 				userInteraction.invalidUser();
 			}
@@ -71,16 +75,58 @@ public class DentistController {
 	private void mainMenu() {
 		userInteraction.dentistOfficeGreeting();
 		int choice = userInteraction.dentistOfficeMenu();
-		
+
 		switch (choice) {
+
+		// Add someone
+		case 2:
+			int selection1 = userInteraction.addSomeoneSubMenu();
+
+			switch (selection1) {
+			case 1:
+				if (currentUser.getRole() == UserRole.Administrative) {
+
+				} else {
+					userInteraction.noPermission();
+					mainMenu();
+				}
+
+			case 2:
+
+			case 3:
+				mainMenu();
+
+			}
+
+		case 3:
+
+			int selection2 = userInteraction.removeSomeoneSubMenu();
+
+			switch (selection2) {
+			case 1:
+				if (currentUser.getRole() == UserRole.Administrative) {
+
+				} else {
+					userInteraction.noPermission();
+					mainMenu();
+				}
+
+			case 2:
+
+			case 3:
+				mainMenu();
+
+			}
+
+			// Save
 		case 5:
-				database.add(clinic);
+			database.add(clinic);
 			try {
 				database.save();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-				database.clear();
+			database.clear();
 		}
 	}
 }

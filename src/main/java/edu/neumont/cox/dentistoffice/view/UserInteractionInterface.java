@@ -19,4 +19,9 @@ public interface UserInteractionInterface {
 	String getPassword();
 
 	void invalidUser();
+	
+	int addSomeoneSubMenu();
+	
+	int removeSomeoneSubMenu();
+
 }

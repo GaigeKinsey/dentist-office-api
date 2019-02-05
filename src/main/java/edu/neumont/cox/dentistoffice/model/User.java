@@ -1,6 +1,7 @@
 package edu.neumont.cox.dentistoffice.model;
 
 public class User extends Clinic{
+	
 	/**
 	 * 
 	 */
@@ -31,15 +32,15 @@ public class User extends Clinic{
 		return check;
 	}
 	
-	public boolean addUser(User user) {
-		boolean check = true;
-		if (this.getRole() == UserRole.Administrative) {
-			
-		} else {
-			check = false;
-		}
-		return check;
-	}
+//	public boolean addUser(User user) {
+//		boolean check = true;
+//		if (this.getRole() == UserRole.Administrative) {
+//			
+//		} else {
+//			check = false;
+//		}
+//		return check;
+//	}
 	
 	public boolean removeUser(User user) {
 		boolean check = true;
@@ -62,7 +63,7 @@ public class User extends Clinic{
 	}
 	
 	public void changePassword(String password) {
-		
+		this.password = password;
 	}
 	
 	public UserRole getRole() {
