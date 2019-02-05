@@ -159,6 +159,10 @@ public class DentistController {
 			
 			//Collections	
 			case 3:	
+			
+			//Main menu	
+			case 4:
+				mainMenu();
 			}
 
 		// Save
