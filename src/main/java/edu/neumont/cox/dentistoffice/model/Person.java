@@ -1,6 +1,6 @@
 package edu.neumont.cox.dentistoffice.model;
 
-public class Person {
+public class Person extends Clinic{
 	private String firstName;
 	private String lastName;
 	private int uniqueId;

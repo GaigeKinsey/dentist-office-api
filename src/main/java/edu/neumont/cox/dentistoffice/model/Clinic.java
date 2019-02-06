@@ -13,23 +13,23 @@ public class Clinic implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List<Provider> providers = new ArrayList<>();
+//	private List<Provider> providers = new ArrayList<>();
 	private List<Payment> payments = new ArrayList<>();
-	private List<Patient> patients = new ArrayList<>();
+//	private List<Patient> patients = new ArrayList<>();
 	private List<Appointment> appointments = new ArrayList<>();
 //	private List<User> users = new ArrayList<>();
 	
 	Map<String, User> users = new HashMap<>();
-//	Map<String, Provider> providers = new HashMap<>();
-//	Map<String, Patient> patients = new HashMap<>();
+	Map<String, Provider> providers = new HashMap<>();
+	Map<String, Patient> patients = new HashMap<>();
 	
-	public List<Provider> getProviders() {
-		return providers;
-	}
-	
-	public void setProviders(List<Provider> providers) {
-		this.providers = providers;
-	}
+//	public List<Provider> getProviders() {
+//		return providers;
+//	}
+//	
+//	public void setProviders(List<Provider> providers) {
+//		this.providers = providers;
+//	}
 
 	public List<Payment> getPayments() {
 		return payments;
@@ -39,13 +39,13 @@ public class Clinic implements Serializable{
 		this.payments = payments;
 	}
 
-	public List<Patient> getPatients() {
-		return patients;
-	}
-
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
-	}
+//	public List<Patient> getPatients() {
+//		return patients;
+//	}
+//
+//	public void setPatients(List<Patient> patients) {
+//		this.patients = patients;
+//	}
 	
 	public List<Appointment> getAppointments() {
 		return appointments;
@@ -65,6 +65,14 @@ public class Clinic implements Serializable{
 
 	public void addUser(User user) {
 		this.users.put(user.getUsername(), user);
+	}
+	
+	public void addPatient(Patient patient) {
+		this.patients.put(patient.getLastName(), patient);
+	}
+	
+	public void addProvider(Provider provider) {
+		this.providers.put(provider.getLastName(), provider);
 	}
 	
 	public List<Appointment> getFutureAppointments(){
