@@ -120,27 +120,36 @@ public class DentistController {
 		} while (isRunning);
 	}
 
-	private Clinic searchMenu() {
+	private void searchMenu() {
 		int searchSelection = userInteraction.searchSubMenu();
-		Clinic selectedObject = null;
 		if (searchSelection != 0) {
-			switch (searchSelection) {
-			//users
-			case 1:
-				String firstName = userInteraction.getSearchFirstName();
-				String lastName = userInteraction.getSearchLastName();
-				String username = userInteraction.getSearchUsername();
-				List<User> matchedUsers = meetsSearch(firstName, lastName, username);
-				selectedObject = matchedUsers.get(userInteraction.getSearchSelection(matchedUsers) - 1);
+			search(searchSelection);
+		}
+	}
+
+	private Clinic search(int value) {
+		Clinic selectedObject = null;
+		switch (value) {
+		// users
+		case 1:
+			String firstName = userInteraction.getSearchFirstName();
+			String lastName = userInteraction.getSearchLastName();
+			String username = userInteraction.getSearchUsername();
+			List<User> matchedUsers = meetsSearch(firstName, lastName, username);
+			int userSelection = userInteraction.getSearchSelection(matchedUsers) - 1;
+			if (userSelection > 0) {
+				selectedObject = matchedUsers.get(userSelection);
 			}
+			break;
 		}
 		return selectedObject;
 	}
-	
+
 	private List<User> meetsSearch(String firstName, String lastName, String username) {
 		List<User> matchedUsers = new ArrayList<>();
 		for (User user : clinic.getUsers().values()) {
-			if (user.getFirstName().startsWith(firstName) && user.getLastName().startsWith(lastName) && user.getUsername().startsWith(username)) {
+			if (user.getFirstName().startsWith(firstName) && user.getLastName().startsWith(lastName)
+					&& user.getUsername().startsWith(username)) {
 				matchedUsers.add(user);
 			}
 		}
@@ -232,7 +241,8 @@ public class DentistController {
 		case 1:
 			// users
 			if (currentUser.getRole() == UserRole.Administrative) {
-
+				User user = (User) search(1);
+				clinic.getUsers().remove(user.getUsername());
 			} else {
 				userInteraction.noPermission();
 			}
