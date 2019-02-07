@@ -7,22 +7,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Clinic implements Serializable{
+public class Clinic implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 //	private List<Provider> providers = new ArrayList<>();
 	private List<Payment> payments = new ArrayList<>();
 //	private List<Patient> patients = new ArrayList<>();
 	private List<Appointment> appointments = new ArrayList<>();
 //	private List<User> users = new ArrayList<>();
-	
+
 	Map<String, User> users = new HashMap<>();
 	Map<String, Provider> providers = new HashMap<>();
 	Map<String, Patient> patients = new HashMap<>();
-	
+
 //	public List<Provider> getProviders() {
 //		return providers;
 //	}
@@ -46,7 +46,7 @@ public class Clinic implements Serializable{
 //	public void setPatients(List<Patient> patients) {
 //		this.patients = patients;
 //	}
-	
+
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}
@@ -66,55 +66,59 @@ public class Clinic implements Serializable{
 	public void addUser(User user) {
 		this.users.put(user.getUsername(), user);
 	}
-	
+
 	public void addPatient(Patient patient) {
 		this.patients.put(patient.getLastName(), patient);
 	}
-	
+
 	public void addProvider(Provider provider) {
 		this.providers.put(provider.getLastName(), provider);
 	}
-	
-	public List<Appointment> getFutureAppointments(){
+
+	public List<Appointment> getFutureAppointments() {
 		return null;
 	}
-	
-	public List<Appointment> getPastAppointments(){
+
+	public List<Appointment> getPastAppointments() {
 		return null;
 	}
-	
-	public List<Provider> searchProviders(ProviderSearchCriteria criteria){
+
+	public List<User> searchUsers(UserSearchCriteria criteria) {
 		return null;
 	}
-	
-	public List<Patient> searchPatients(PatientSearchCriteria criteria){
+
+	public List<Provider> searchProviders(ProviderSearchCriteria criteria) {
 		return null;
 	}
-	
-	public List<Appointment> searchAppointments(AppointmentSearchCriteria criteria){
+
+	public List<Patient> searchPatients(PatientSearchCriteria criteria) {
 		return null;
 	}
-	
+
+	public List<Appointment> searchAppointments(AppointmentSearchCriteria criteria) {
+		return null;
+	}
+
 	public void receivePayment(Payment payment) {
-		
+
 	}
-	
+
 	public double getAccountBalance(int patientId) {
-		return 0;	
+		return 0;
 	}
-	
-	//Reports - idk if you wanna go about it this way??
-	//Haven't thought this all the way through - I have void for now 
+
+	// Reports - idk if you wanna go about it this way??
+	// Haven't thought this all the way through - I have void for now
 	public void productionReport(LocalDate startDate, LocalDate endDate, boolean groupBy) {
-		
+
 	}
-	
+
 	public void patientBalanceReport(boolean sort) {
-		
+
 	}
-	
+
 	public void collectionsReport(LocalDate startDate, LocalDate endDate, boolean groupBy) {
-		
+
 	}
-	
+
 }

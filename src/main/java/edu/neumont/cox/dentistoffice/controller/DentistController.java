@@ -52,27 +52,23 @@ public class DentistController {
 	}
 
 	private void login() {
-//		List<User> users = clinic.getUsers();
 		boolean checkUser = false;
 
 		do {
 			String username = userInteraction.getUsername();
 			String password = userInteraction.getPassword();
 			User user = clinic.getUsers().get(username);
-			if (user.getPassword().equals(password)) {
-				currentUser = user;
-				checkUser = true;
-			}
+			try {
 
-//			for (User user : users) {
-//				if (user.getUsername().equals(username)) {
-//					if (user.getPassword().equals(password)) {
-//						currentUser = user;
-//						checkUser = true;
-//					}
-//				}
-//			}
-			if (!checkUser) {
+				if (user.getPassword().equals(password)) {
+					currentUser = user;
+					checkUser = true;
+				}
+
+				if (!checkUser) {
+					userInteraction.invalidUser();
+				}
+			} catch (NullPointerException npe) {
 				userInteraction.invalidUser();
 			}
 		} while (!checkUser);
@@ -81,28 +77,66 @@ public class DentistController {
 
 	private void mainMenu() {
 		userInteraction.dentistOfficeGreeting();
-		int choice = userInteraction.dentistOfficeMenu();
-
-		switch (choice) {
-
-		// Search
-		case 1:
-
+		boolean isRunning = true;
+		do {
+			int choice = userInteraction.dentistOfficeMenu();
+			switch (choice) {
+			case 0:
+				isRunning = false;
+				break;
+			// Search
+			case 1:
+				searchMenu();
+				break;
 			// Schedule an appointment
-		case 2:
+			case 2:
 
+				break;
 			// Add someone
-		case 3:
-			int addSelection = userInteraction.addSomeoneSubMenu();
+			case 3:
+				addSomeone();
+				break;
+			// Remove someone
+			case 4:
+				removeSomeone();
+				break;
+			// Report
+			case 5:
+				generateReports();
+				break;
 
+			// Save
+			case 6:
+				database.add(clinic);
+				try {
+					database.save();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				database.clear();
+			}
+		} while (isRunning);
+	}
+
+	private void searchMenu() {
+		int searchSelection = userInteraction.searchSubMenu();
+		if (searchSelection != 0) {
+
+		}
+	}
+
+	private void addSomeone() {
+		int addSelection = userInteraction.addSomeoneSubMenu();
+		if (addSelection != 0) {
+
+			// We get the names for each option, might as well get them once here.
+			String firstName = userInteraction.getFirstName();
+			String lastName = userInteraction.getLastName();
 			switch (addSelection) {
-			// user
 			case 1:
 				if (currentUser.getRole() == UserRole.Administrative) {
 					String username = userInteraction.getUsername();
-					String password = userInteraction.getPassword();
-					String firstName = userInteraction.getFirstName();
-					String lastName = userInteraction.getLastName();
+					String password = userInteraction.createPassword();
 					UserRole role = null;
 
 					int roleChoice = userInteraction.userRoleChoice();
@@ -113,23 +147,18 @@ public class DentistController {
 					}
 
 					clinic.addUser(new User(username, password, firstName, lastName, role));
-
-					mainMenu();
-
 				} else {
 					userInteraction.noPermission();
-					mainMenu();
 				}
+				break;
 
-				// patient
+			// patient
 			case 2:
-				String firstName = userInteraction.getFirstName();
-				String lastName = userInteraction.getLastName();
 				int uniqueId = userInteraction.getUniqueId();
 				String email = userInteraction.getEmail();
-				
+
 				PhoneNumber phone = new PhoneNumber();
-				
+
 				// Insurance Provider
 				userInteraction.insuranceProviderPrompt();
 				String companyName = userInteraction.getCompanyName();
@@ -140,97 +169,81 @@ public class DentistController {
 				// Payment Card
 				userInteraction.paymentCardPrompt();
 				long cardNumber = userInteraction.getCardNumber();
-		//Didn't mess with this part that much, just stubbed out the UI method
+				// Didn't mess with this part that much, just stubbed out the UI method
 				LocalDate expireDate = userInteraction.getExpireDate();
 				String holderName = userInteraction.getHolderName();
 				int cvv = userInteraction.getCVV();
 				int zipCode = userInteraction.getZipCode();
 				PaymentCard card = new PaymentCard(cardNumber, expireDate, holderName, cvv, zipCode);
-				
-				//adds patient
-				clinic.addPatient(new Patient(firstName, lastName, uniqueId, email, phone, insurance, card));
 
-				mainMenu();
-				// provider
+				// adds patient
+				clinic.addPatient(new Patient(firstName, lastName, uniqueId, email, phone, insurance, card));
+				break;
+			// provider
 			case 3:
-				String proFirstName = userInteraction.getFirstName();
-				String proLastName = userInteraction.getLastName();
 				int proUniqueId = userInteraction.getUniqueId();
 				String proEmail = userInteraction.getEmail();
 				PhoneNumber proPhone = new PhoneNumber();
-				
+
 				ProviderType title = null;
 
 				int roleChoice = userInteraction.getProviderType();
 				if (roleChoice == 1) {
 					title = ProviderType.Assistant;
-				} else if(roleChoice == 2){
+				} else if (roleChoice == 2) {
 					title = ProviderType.Dentist;
 				} else {
 					title = ProviderType.Hygienist;
 				}
-				
-				//addsProvider
-				clinic.addProvider(new Provider(proFirstName, proLastName, proUniqueId, proEmail, proPhone, title));
-				
-				mainMenu();
 
-			case 4:
-				mainMenu();
-
+				// addsProvider
+				clinic.addProvider(new Provider(firstName, lastName, proUniqueId, proEmail, proPhone, title));
+				break;
 			}
-			// Remove someone
-		case 4:
+		}
+	}
 
-			int remSelection = userInteraction.removeSomeoneSubMenu();
+	public void removeSomeone() {
+		int remSelection = userInteraction.removeSomeoneSubMenu();
 
-			switch (remSelection) {
-			case 1:
-				if (currentUser.getRole() == UserRole.Administrative) {
+		switch (remSelection) {
+		case 1:
+			// users
+			if (currentUser.getRole() == UserRole.Administrative) {
 
-				} else {
-					userInteraction.noPermission();
-					mainMenu();
-				}
-
-			case 2:
-
-			case 3:
-
-			case 4:
-				mainMenu();
-
+			} else {
+				userInteraction.noPermission();
 			}
+			break;
+		// patient
+		case 2:
 
-			// Report
-		case 5:
-			int repSelection = userInteraction.reportsMenu();
+			break;
+		// provider
+		case 3:
 
+			break;
+		}
+	}
+
+	private void generateReports() {
+		int repSelection = userInteraction.reportsMenu();
+		if (repSelection != 0) {
 			switch (repSelection) {
 
 			// production
 			case 1:
 
-				// Patient Balance
+				break;
+			// Patient Balance
 			case 2:
 
-				// Collections
+				break;
+			// Collections
 			case 3:
 
-				// Main menu
-			case 4:
-				mainMenu();
+				break;
 			}
-
-			// Save
-		case 6:
-			database.add(clinic);
-			try {
-				database.save();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			database.clear();
 		}
 	}
 }

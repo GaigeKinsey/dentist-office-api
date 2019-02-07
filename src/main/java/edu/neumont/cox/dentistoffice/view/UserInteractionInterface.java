@@ -59,4 +59,8 @@ public interface UserInteractionInterface {
 	int getZipCode();
 
 	int getProviderType();
+
+	int searchSubMenu();
+
+	String createPassword();
 }

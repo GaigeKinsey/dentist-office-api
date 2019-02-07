@@ -32,16 +32,6 @@ public class User extends Clinic{
 		return check;
 	}
 	
-//	public boolean addUser(User user) {
-//		boolean check = true;
-//		if (this.getRole() == UserRole.Administrative) {
-//			
-//		} else {
-//			check = false;
-//		}
-//		return check;
-//	}
-	
 	public boolean removeUser(User user) {
 		boolean check = true;
 		if (this.getRole() == UserRole.Administrative) {
