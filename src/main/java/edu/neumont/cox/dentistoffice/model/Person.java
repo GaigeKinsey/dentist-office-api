@@ -1,6 +1,11 @@
 package edu.neumont.cox.dentistoffice.model;
 
 public class Person extends Clinic{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String firstName;
 	private String lastName;
 	private int uniqueId;

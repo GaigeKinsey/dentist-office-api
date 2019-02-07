@@ -101,4 +101,9 @@ public class User extends Clinic{
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	@Override
+	public String toString() {
+		return "First Name: " + this.getFirstName() + " Last Name: " + this.getLastName() + " Username: " + this.getUsername();
+	}
 }

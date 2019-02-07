@@ -2,6 +2,8 @@ package edu.neumont.cox.dentistoffice.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.neumont.cox.dentistoffice.model.Clinic;
 import edu.neumont.cox.dentistoffice.model.InsuranceInfo;
@@ -118,11 +120,31 @@ public class DentistController {
 		} while (isRunning);
 	}
 
-	private void searchMenu() {
+	private Clinic searchMenu() {
 		int searchSelection = userInteraction.searchSubMenu();
+		Clinic selectedObject = null;
 		if (searchSelection != 0) {
-
+			switch (searchSelection) {
+			//users
+			case 1:
+				String firstName = userInteraction.getSearchFirstName();
+				String lastName = userInteraction.getSearchLastName();
+				String username = userInteraction.getSearchUsername();
+				List<User> matchedUsers = meetsSearch(firstName, lastName, username);
+				selectedObject = matchedUsers.get(userInteraction.getSearchSelection(matchedUsers) - 1);
+			}
 		}
+		return selectedObject;
+	}
+	
+	private List<User> meetsSearch(String firstName, String lastName, String username) {
+		List<User> matchedUsers = new ArrayList<>();
+		for (User user : clinic.getUsers().values()) {
+			if (user.getFirstName().startsWith(firstName) && user.getLastName().startsWith(lastName) && user.getUsername().startsWith(username)) {
+				matchedUsers.add(user);
+			}
+		}
+		return matchedUsers;
 	}
 
 	private void addSomeone() {

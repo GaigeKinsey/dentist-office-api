@@ -2,6 +2,11 @@ package edu.neumont.cox.dentistoffice.model;
 
 public class Patient extends Person{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private InsuranceInfo insurance;
 	private PaymentCard paymentCard;
 

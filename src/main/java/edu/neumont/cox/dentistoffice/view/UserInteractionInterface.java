@@ -1,6 +1,9 @@
 package edu.neumont.cox.dentistoffice.view;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import edu.neumont.cox.dentistoffice.model.User;
 
 public interface UserInteractionInterface {
 
@@ -63,4 +66,12 @@ public interface UserInteractionInterface {
 	int searchSubMenu();
 
 	String createPassword();
+
+	String getSearchFirstName();
+
+	String getSearchLastName();
+
+	String getSearchUsername();
+
+	int getSearchSelection(List<User> matchedUsers);
 }
