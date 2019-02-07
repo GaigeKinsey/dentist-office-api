@@ -63,6 +63,22 @@ public class Clinic implements Serializable {
 		this.users = users;
 	}
 
+	public Map<String, Provider> getProviders() {
+		return providers;
+	}
+
+	public void setProviders(Map<String, Provider> providers) {
+		this.providers = providers;
+	}
+
+	public Map<String, Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(Map<String, Patient> patients) {
+		this.patients = patients;
+	}
+
 	public void addUser(User user) {
 		this.users.put(user.getUsername(), user);
 	}

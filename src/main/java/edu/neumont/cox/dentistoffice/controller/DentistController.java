@@ -132,25 +132,113 @@ public class DentistController {
 		switch (value) {
 		// users
 		case 1:
-			String firstName = userInteraction.getSearchFirstName();
-			String lastName = userInteraction.getSearchLastName();
-			String username = userInteraction.getSearchUsername();
-			List<User> matchedUsers = meetsSearch(firstName, lastName, username);
-			int userSelection = userInteraction.getSearchSelection(matchedUsers) - 1;
-			if (userSelection > 0) {
-				selectedObject = matchedUsers.get(userSelection);
-			}
+			selectedObject = searchUser();
+			break;
+		// Patients
+		case 2:
+			selectedObject = searchPatient();
+			break;
+
+		// Providers
+		case 3:
+			selectedObject = searchProvider();
 			break;
 		}
 		return selectedObject;
 	}
 
-	private List<User> meetsSearch(String firstName, String lastName, String username) {
+	private Clinic searchUser() {
+		Clinic selectedObject = null;
+
+		String firstName = userInteraction.getSearchFirstName();
+		String lastName = userInteraction.getSearchLastName();
+		String username = userInteraction.getSearchUsername();
+		List<User> matchedUsers = meetsUserSearch(firstName, lastName, username);
+		int userSelection = userInteraction.getUserSearchSelection(matchedUsers) - 1;
+		if (userSelection > 0) {
+			selectedObject = matchedUsers.get(userSelection);
+		}
+
+		return selectedObject;
+	}
+
+	private Clinic searchPatient() {
+		Clinic selectedObject = null;
+		
+		String firstName = userInteraction.getSearchFirstName();
+		String lastName = userInteraction.getSearchLastName();
+		String companyName = userInteraction.getSearchCompanyName();
+		String groupId = userInteraction.getSearchGroupId();
+		String memberId = userInteraction.getSearchMemberId();
+		
+		InsuranceInfo insurance = new InsuranceInfo(companyName, groupId, memberId);
+
+		List<Patient> matchedPatients = meetsPatientSearch(firstName, lastName, insurance);
+		int userSelection = userInteraction.getPatientSearchSelection(matchedPatients) - 1;
+		if (userSelection > 0) {
+			selectedObject = matchedPatients.get(userSelection);
+		}
+		
+		return selectedObject;
+	}
+
+	private Clinic searchProvider() {
+		Clinic selectedObject = null;
+		
+		String firstName = userInteraction.getSearchFirstName();
+		String lastName = userInteraction.getSearchLastName();
+		
+		ProviderType title = null;
+
+		int roleChoice = userInteraction.getProviderType();
+		if (roleChoice == 1) {
+			title = ProviderType.Assistant;
+		} else if (roleChoice == 2) {
+			title = ProviderType.Dentist;
+		} else {
+			title = ProviderType.Hygienist;
+		}
+
+		List<Provider> matchedProviders = meetsProviderSearch(firstName, lastName, title);
+		int userSelection = userInteraction.getProviderSearchSelection(matchedProviders) - 1;
+		if (userSelection > 0) {
+			selectedObject = matchedProviders.get(userSelection);
+		}
+		
+		return selectedObject;
+	}
+
+	//User - meetSearch
+	private List<User> meetsUserSearch(String firstName, String lastName, String username) {
 		List<User> matchedUsers = new ArrayList<>();
 		for (User user : clinic.getUsers().values()) {
 			if (user.getFirstName().startsWith(firstName) && user.getLastName().startsWith(lastName)
 					&& user.getUsername().startsWith(username)) {
 				matchedUsers.add(user);
+			}
+		}
+		return matchedUsers;
+	}
+	
+	//patient - meetSearch
+	private List<Patient> meetsPatientSearch(String firstName, String lastName, InsuranceInfo insurance) {
+		List<Patient> matchedUsers = new ArrayList<>();
+		for (Patient patient : clinic.getPatients().values()) {
+			if (patient.getFirstName().startsWith(firstName) && patient.getLastName().startsWith(lastName)
+					&& patient.getInsurance().toString().startsWith(insurance.toString()/*Might not work*/)) {
+				matchedUsers.add(patient);
+			}
+		}
+		return matchedUsers;
+	}
+	
+	//provider - meetSearch
+	private List<Provider> meetsProviderSearch(String firstName, String lastName, ProviderType title) {
+		List<Provider> matchedUsers = new ArrayList<>();
+		for (Provider provider : clinic.getProviders().values()) {
+			if (provider.getFirstName().startsWith(firstName) && provider.getLastName().startsWith(lastName) 
+					&& provider.getTitle().toString().startsWith(title.toString())) {
+				matchedUsers.add(provider);
 			}
 		}
 		return matchedUsers;

@@ -1,17 +1,17 @@
 package edu.neumont.cox.dentistoffice.model;
 
-public class Person extends Clinic{
+public class Person extends Clinic {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private String firstName;
 	private String lastName;
 	private int uniqueId;
 	private String email;
 	private PhoneNumber phone;
-	
+
 	public Person(String firstName, String lastName, int uniqueId, String email, PhoneNumber phone) {
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
@@ -59,6 +59,11 @@ public class Person extends Clinic{
 	public void setPhone(PhoneNumber phone) {
 		this.phone = phone;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "First Name: " + this.getFirstName() + ", Last Name: " + this.getLastName() + ", Unique ID: "
+				+ this.getUniqueId() + ", Email: " + this.getEmail() + ", Phone: " + this.getPhone();
+	}
+
 }

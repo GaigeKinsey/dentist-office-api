@@ -3,6 +3,8 @@ package edu.neumont.cox.dentistoffice.view;
 import java.time.LocalDate;
 import java.util.List;
 
+import edu.neumont.cox.dentistoffice.model.Patient;
+import edu.neumont.cox.dentistoffice.model.Provider;
 import edu.neumont.cox.dentistoffice.model.User;
 
 public interface UserInteractionInterface {
@@ -73,5 +75,16 @@ public interface UserInteractionInterface {
 
 	String getSearchUsername();
 
-	int getSearchSelection(List<User> matchedUsers);
+	int getUserSearchSelection(List<User> matchedUsers);
+
+	String getSearchCompanyName();
+
+	String getSearchGroupId();
+
+	String getSearchMemberId();
+
+	int getPatientSearchSelection(List<Patient> matchedPatients);
+
+	int getProviderSearchSelection(List<Provider> matchedProviders);
+
 }
