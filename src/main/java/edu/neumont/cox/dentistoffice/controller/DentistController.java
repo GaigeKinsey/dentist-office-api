@@ -337,11 +337,13 @@ public class DentistController {
 			break;
 		// patient
 		case 2:
-
+			Patient patient = (Patient) search(2);
+			clinic.getPatients().remove(patient.getLastName());
 			break;
 		// provider
 		case 3:
-
+			Provider provider = (Provider) search(3);
+			clinic.getProviders().remove(provider.getLastName());
 			break;
 		}
 	}
