@@ -168,12 +168,8 @@ public class DentistController {
 		String firstName = userInteraction.getSearchFirstName();
 		String lastName = userInteraction.getSearchLastName();
 		String companyName = userInteraction.getSearchCompanyName();
-		String groupId = userInteraction.getSearchGroupId();
-		String memberId = userInteraction.getSearchMemberId();
-		
-		InsuranceInfo insurance = new InsuranceInfo(companyName, groupId, memberId);
 
-		List<Patient> matchedPatients = meetsPatientSearch(firstName, lastName, insurance);
+		List<Patient> matchedPatients = meetsPatientSearch(firstName, lastName, companyName);
 		int userSelection = userInteraction.getPatientSearchSelection(matchedPatients) - 1;
 		if (userSelection > 0) {
 			selectedObject = matchedPatients.get(userSelection);
@@ -221,11 +217,11 @@ public class DentistController {
 	}
 	
 	//patient - meetSearch
-	private List<Patient> meetsPatientSearch(String firstName, String lastName, InsuranceInfo insurance) {
+	private List<Patient> meetsPatientSearch(String firstName, String lastName, String companyName) {
 		List<Patient> matchedUsers = new ArrayList<>();
 		for (Patient patient : clinic.getPatients().values()) {
 			if (patient.getFirstName().startsWith(firstName) && patient.getLastName().startsWith(lastName)
-					&& patient.getInsurance().toString().startsWith(insurance.toString()/*Might not work*/)) {
+					&& patient.getInsurance().getCompanyName().startsWith(companyName)) {
 				matchedUsers.add(patient);
 			}
 		}

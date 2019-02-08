@@ -13,23 +13,12 @@ public class Clinic implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-//	private List<Provider> providers = new ArrayList<>();
 	private List<Payment> payments = new ArrayList<>();
-//	private List<Patient> patients = new ArrayList<>();
 	private List<Appointment> appointments = new ArrayList<>();
-//	private List<User> users = new ArrayList<>();
 
 	Map<String, User> users = new HashMap<>();
 	Map<String, Provider> providers = new HashMap<>();
 	Map<String, Patient> patients = new HashMap<>();
-
-//	public List<Provider> getProviders() {
-//		return providers;
-//	}
-//	
-//	public void setProviders(List<Provider> providers) {
-//		this.providers = providers;
-//	}
 
 	public List<Payment> getPayments() {
 		return payments;
@@ -38,14 +27,6 @@ public class Clinic implements Serializable {
 	public void setPayments(List<Payment> payments) {
 		this.payments = payments;
 	}
-
-//	public List<Patient> getPatients() {
-//		return patients;
-//	}
-//
-//	public void setPatients(List<Patient> patients) {
-//		this.patients = patients;
-//	}
 
 	public List<Appointment> getAppointments() {
 		return appointments;
@@ -96,22 +77,6 @@ public class Clinic implements Serializable {
 	}
 
 	public List<Appointment> getPastAppointments() {
-		return null;
-	}
-
-	public List<User> searchUsers(UserSearchCriteria criteria) {
-		return null;
-	}
-
-	public List<Provider> searchProviders(ProviderSearchCriteria criteria) {
-		return null;
-	}
-
-	public List<Patient> searchPatients(PatientSearchCriteria criteria) {
-		return null;
-	}
-
-	public List<Appointment> searchAppointments(AppointmentSearchCriteria criteria) {
 		return null;
 	}
 

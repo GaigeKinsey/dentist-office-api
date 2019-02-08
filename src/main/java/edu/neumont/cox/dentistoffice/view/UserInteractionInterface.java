@@ -75,13 +75,9 @@ public interface UserInteractionInterface {
 
 	String getSearchUsername();
 
-	int getUserSearchSelection(List<User> matchedUsers);
-
 	String getSearchCompanyName();
-
-	String getSearchGroupId();
-
-	String getSearchMemberId();
+	
+	int getUserSearchSelection(List<User> matchedUsers);
 
 	int getPatientSearchSelection(List<Patient> matchedPatients);
 
