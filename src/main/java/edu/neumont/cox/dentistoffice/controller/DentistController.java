@@ -155,7 +155,7 @@ public class DentistController {
 		String username = userInteraction.getSearchUsername();
 		List<User> matchedUsers = meetsUserSearch(firstName, lastName, username);
 		int userSelection = userInteraction.getUserSearchSelection(matchedUsers) - 1;
-		if (userSelection > 0) {
+		if (userSelection >= 0) {
 			selectedObject = matchedUsers.get(userSelection);
 		}
 
@@ -170,9 +170,9 @@ public class DentistController {
 		String companyName = userInteraction.getSearchCompanyName();
 
 		List<Patient> matchedPatients = meetsPatientSearch(firstName, lastName, companyName);
-		int userSelection = userInteraction.getPatientSearchSelection(matchedPatients) - 1;
-		if (userSelection > 0) {
-			selectedObject = matchedPatients.get(userSelection);
+		int patientSelection = userInteraction.getPatientSearchSelection(matchedPatients) - 1;
+		if (patientSelection >= 0) {
+			selectedObject = matchedPatients.get(patientSelection);
 		}
 		
 		return selectedObject;
@@ -191,14 +191,14 @@ public class DentistController {
 			title = ProviderType.Assistant;
 		} else if (roleChoice == 2) {
 			title = ProviderType.Dentist;
-		} else {
+		} else if (roleChoice == 3){
 			title = ProviderType.Hygienist;
 		}
 
 		List<Provider> matchedProviders = meetsProviderSearch(firstName, lastName, title);
-		int userSelection = userInteraction.getProviderSearchSelection(matchedProviders) - 1;
-		if (userSelection > 0) {
-			selectedObject = matchedProviders.get(userSelection);
+		int providerSelection = userInteraction.getProviderSearchSelection(matchedProviders) - 1;
+		if (providerSelection >= 0) {
+			selectedObject = matchedProviders.get(providerSelection);
 		}
 		
 		return selectedObject;
@@ -218,26 +218,26 @@ public class DentistController {
 	
 	//patient - meetSearch
 	private List<Patient> meetsPatientSearch(String firstName, String lastName, String companyName) {
-		List<Patient> matchedUsers = new ArrayList<>();
+		List<Patient> matchedPatients = new ArrayList<>();
 		for (Patient patient : clinic.getPatients().values()) {
 			if (patient.getFirstName().startsWith(firstName) && patient.getLastName().startsWith(lastName)
 					&& patient.getInsurance().getCompanyName().startsWith(companyName)) {
-				matchedUsers.add(patient);
+				matchedPatients.add(patient);
 			}
 		}
-		return matchedUsers;
+		return matchedPatients;
 	}
 	
 	//provider - meetSearch
 	private List<Provider> meetsProviderSearch(String firstName, String lastName, ProviderType title) {
-		List<Provider> matchedUsers = new ArrayList<>();
+		List<Provider> matchedProviders = new ArrayList<>();
 		for (Provider provider : clinic.getProviders().values()) {
 			if (provider.getFirstName().startsWith(firstName) && provider.getLastName().startsWith(lastName) 
 					&& provider.getTitle().toString().startsWith(title.toString())) {
-				matchedUsers.add(provider);
+				matchedProviders.add(provider);
 			}
 		}
-		return matchedUsers;
+		return matchedProviders;
 	}
 
 	private void addSomeone() {
