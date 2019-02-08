@@ -425,12 +425,8 @@ public class DentistController {
 		boolean valid = false;
 		do {
 			rawExpireDate = userInteraction.getExpireDate();
-			if (rawExpireDate.length() == 5) {
-				if (rawExpireDate.matches("\\d\\d/\\d\\d")) {
-					valid = true;
-				} else {
-					userInteraction.invalidExpireDate();
-				}
+			if (rawExpireDate.matches("^(0[1-9]|1[0-2])/[0-9][0-9]$")) {
+				valid = true;
 			} else {
 				userInteraction.invalidExpireDate();
 			}
