@@ -53,7 +53,7 @@ public interface UserInteractionInterface {
 
 	void paymentCardPrompt();
 
-	long getCardNumber();
+	String getCardNumber();
 
 	LocalDate getExpireDate();
 
@@ -82,5 +82,11 @@ public interface UserInteractionInterface {
 	int getPatientSearchSelection(List<Patient> matchedPatients);
 
 	int getProviderSearchSelection(List<Provider> matchedProviders);
+
+	String getPhoneNumberString();
+
+	void invalidPhone();
+
+	void invalidCard();
 
 }

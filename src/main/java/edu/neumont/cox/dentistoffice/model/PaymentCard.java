@@ -3,27 +3,26 @@ package edu.neumont.cox.dentistoffice.model;
 import java.time.LocalDate;
 
 public class PaymentCard {
-	
-	private long number;
+	private CardNumber cardNumber;
 	private LocalDate expireDate;
 	private String name;
 	private int cvv;
 	private int zipCode;
 	
-	public PaymentCard(long number, LocalDate expireDate, String name, int cvv, int zipcode) {
-		this.setNumber(number);
+	public PaymentCard(CardNumber cardNumber, LocalDate expireDate, String name, int cvv, int zipcode) {
+		this.setCardNumber(cardNumber);
 		this.setExpireDate(expireDate);
 		this.setName(name);
 		this.setCvv(cvv);
 		this.setZipCode(zipcode);
 	}
-
-	public long getNumber() {
-		return number;
+	
+	public CardNumber getCardNumber() {
+		return cardNumber;
 	}
 
-	public void setNumber(long number) {
-		this.number = number;
+	public void setCardNumber(CardNumber cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
 	public LocalDate getExpireDate() {
@@ -57,7 +56,4 @@ public class PaymentCard {
 	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
-	
-	
-
 }

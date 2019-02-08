@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.neumont.cox.dentistoffice.model.CardNumber;
 import edu.neumont.cox.dentistoffice.model.Clinic;
 import edu.neumont.cox.dentistoffice.model.InsuranceInfo;
 import edu.neumont.cox.dentistoffice.model.Patient;
@@ -164,7 +165,7 @@ public class DentistController {
 
 	private Clinic searchPatient() {
 		Clinic selectedObject = null;
-		
+
 		String firstName = userInteraction.getSearchFirstName();
 		String lastName = userInteraction.getSearchLastName();
 		String companyName = userInteraction.getSearchCompanyName();
@@ -174,16 +175,16 @@ public class DentistController {
 		if (patientSelection >= 0) {
 			selectedObject = matchedPatients.get(patientSelection);
 		}
-		
+
 		return selectedObject;
 	}
 
 	private Clinic searchProvider() {
 		Clinic selectedObject = null;
-		
+
 		String firstName = userInteraction.getSearchFirstName();
 		String lastName = userInteraction.getSearchLastName();
-		
+
 		ProviderType title = null;
 
 		int roleChoice = userInteraction.getProviderType();
@@ -191,7 +192,7 @@ public class DentistController {
 			title = ProviderType.Assistant;
 		} else if (roleChoice == 2) {
 			title = ProviderType.Dentist;
-		} else if (roleChoice == 3){
+		} else if (roleChoice == 3) {
 			title = ProviderType.Hygienist;
 		}
 
@@ -200,11 +201,11 @@ public class DentistController {
 		if (providerSelection >= 0) {
 			selectedObject = matchedProviders.get(providerSelection);
 		}
-		
+
 		return selectedObject;
 	}
 
-	//User - meetSearch
+	// User - meetSearch
 	private List<User> meetsUserSearch(String firstName, String lastName, String username) {
 		List<User> matchedUsers = new ArrayList<>();
 		for (User user : clinic.getUsers().values()) {
@@ -215,8 +216,8 @@ public class DentistController {
 		}
 		return matchedUsers;
 	}
-	
-	//patient - meetSearch
+
+	// patient - meetSearch
 	private List<Patient> meetsPatientSearch(String firstName, String lastName, String companyName) {
 		List<Patient> matchedPatients = new ArrayList<>();
 		for (Patient patient : clinic.getPatients().values()) {
@@ -227,12 +228,12 @@ public class DentistController {
 		}
 		return matchedPatients;
 	}
-	
-	//provider - meetSearch
+
+	// provider - meetSearch
 	private List<Provider> meetsProviderSearch(String firstName, String lastName, ProviderType title) {
 		List<Provider> matchedProviders = new ArrayList<>();
 		for (Provider provider : clinic.getProviders().values()) {
-			if (provider.getFirstName().startsWith(firstName) && provider.getLastName().startsWith(lastName) 
+			if (provider.getFirstName().startsWith(firstName) && provider.getLastName().startsWith(lastName)
 					&& provider.getTitle().toString().startsWith(title.toString())) {
 				matchedProviders.add(provider);
 			}
@@ -272,7 +273,7 @@ public class DentistController {
 				int uniqueId = userInteraction.getUniqueId();
 				String email = userInteraction.getEmail();
 
-				PhoneNumber phone = new PhoneNumber();
+				PhoneNumber phone = getPhoneNumber();
 
 				// Insurance Provider
 				userInteraction.insuranceProviderPrompt();
@@ -283,7 +284,27 @@ public class DentistController {
 
 				// Payment Card
 				userInteraction.paymentCardPrompt();
-				long cardNumber = userInteraction.getCardNumber();
+				boolean valid = false;
+				int numberOne = 0;
+				int numberTwo = 0;
+				int numberThree = 0;
+				int numberFour = 0;
+				do {
+					String rawCardNumber = userInteraction.getCardNumber();
+					if (rawCardNumber.length() == 16) {
+						try {
+							numberOne = Integer.parseInt(rawCardNumber.substring(0, 4));
+							numberTwo = Integer.parseInt(rawCardNumber.substring(4, 8));
+							numberThree = Integer.parseInt(rawCardNumber.substring(8, 12));
+							numberFour = Integer.parseInt(rawCardNumber.substring(12, 16));
+						} catch (NumberFormatException nfe) {
+							userInteraction.invalidCard();
+						}
+					} else {
+						userInteraction.invalidCard();
+					}
+				} while (!valid);
+				CardNumber cardNumber = new CardNumber(numberOne, numberTwo, numberThree, numberFour);
 				// Didn't mess with this part that much, just stubbed out the UI method
 				LocalDate expireDate = userInteraction.getExpireDate();
 				String holderName = userInteraction.getHolderName();
@@ -342,6 +363,30 @@ public class DentistController {
 			clinic.getProviders().remove(provider.getLastName());
 			break;
 		}
+	}
+
+	private PhoneNumber getPhoneNumber() {
+		boolean valid = false;
+		int firstThreeDigits = 0;
+		int secondThreeDigits = 0;
+		int lastFourDigits = 0;
+		do {
+			String rawNumber = userInteraction.getPhoneNumberString();
+			if (rawNumber.length() == 10) {
+				try {
+					firstThreeDigits = Integer.parseInt(rawNumber.substring(0, 3));
+					secondThreeDigits = Integer.parseInt(rawNumber.substring(3, 6));
+					lastFourDigits = Integer.parseInt(rawNumber.substring(6, 10));
+					valid = true;
+				} catch (NumberFormatException nfe) {
+					userInteraction.invalidPhone();
+				}
+			} else {
+				userInteraction.invalidPhone();
+			}
+		} while (!valid);
+
+		return new PhoneNumber(firstThreeDigits, secondThreeDigits, lastFourDigits);
 	}
 
 	private void generateReports() {
