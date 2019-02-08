@@ -284,27 +284,7 @@ public class DentistController {
 
 				// Payment Card
 				userInteraction.paymentCardPrompt();
-				boolean valid = false;
-				int numberOne = 0;
-				int numberTwo = 0;
-				int numberThree = 0;
-				int numberFour = 0;
-				do {
-					String rawCardNumber = userInteraction.getCardNumber();
-					if (rawCardNumber.length() == 16) {
-						try {
-							numberOne = Integer.parseInt(rawCardNumber.substring(0, 4));
-							numberTwo = Integer.parseInt(rawCardNumber.substring(4, 8));
-							numberThree = Integer.parseInt(rawCardNumber.substring(8, 12));
-							numberFour = Integer.parseInt(rawCardNumber.substring(12, 16));
-						} catch (NumberFormatException nfe) {
-							userInteraction.invalidCard();
-						}
-					} else {
-						userInteraction.invalidCard();
-					}
-				} while (!valid);
-				CardNumber cardNumber = new CardNumber(numberOne, numberTwo, numberThree, numberFour);
+				CardNumber cardNumber = getCardNumber();
 				// Didn't mess with this part that much, just stubbed out the UI method
 				LocalDate expireDate = userInteraction.getExpireDate();
 				String holderName = userInteraction.getHolderName();
@@ -319,7 +299,7 @@ public class DentistController {
 			case 3:
 				int proUniqueId = userInteraction.getUniqueId();
 				String proEmail = userInteraction.getEmail();
-				PhoneNumber proPhone = new PhoneNumber();
+				PhoneNumber proPhone = getPhoneNumber();
 
 				ProviderType title = null;
 
@@ -387,6 +367,31 @@ public class DentistController {
 		} while (!valid);
 
 		return new PhoneNumber(firstThreeDigits, secondThreeDigits, lastFourDigits);
+	}
+	
+	private CardNumber getCardNumber() {
+		boolean valid = false;
+		int numberOne = 0;
+		int numberTwo = 0;
+		int numberThree = 0;
+		int numberFour = 0;
+		do {
+			String rawCardNumber = userInteraction.getCardNumber();
+			if (rawCardNumber.length() == 16) {
+				try {
+					numberOne = Integer.parseInt(rawCardNumber.substring(0, 4));
+					numberTwo = Integer.parseInt(rawCardNumber.substring(4, 8));
+					numberThree = Integer.parseInt(rawCardNumber.substring(8, 12));
+					numberFour = Integer.parseInt(rawCardNumber.substring(12, 16));
+					valid = true;
+				} catch (NumberFormatException nfe) {
+					userInteraction.invalidCard();
+				}
+			} else {
+				userInteraction.invalidCard();
+			}
+		} while (!valid);
+		return new CardNumber(numberOne, numberTwo, numberThree, numberFour);
 	}
 
 	private void generateReports() {

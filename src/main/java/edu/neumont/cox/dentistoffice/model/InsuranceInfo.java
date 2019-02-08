@@ -42,7 +42,7 @@ public class InsuranceInfo extends Clinic {
 
 	@Override
 	public String toString() {
-		return "Company Name: " + this.getCompanyName() + " Group ID: " + this.getGroupId() + " Member ID: " + this.getMemberId();
+		return "Company Name: " + this.getCompanyName() + ", Group ID: " + this.getGroupId() + ", Member ID: " + this.getMemberId();
 	}
 
 }

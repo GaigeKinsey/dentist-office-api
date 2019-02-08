@@ -36,7 +36,7 @@ public class Patient extends Person {
 	@Override
 	public String toString() {
 
-		return super.toString() + ", Insurance Info: " + this.getInsurance().toString();
+		return super.toString() + ", " + this.getInsurance().toString();
 	}
 
 }

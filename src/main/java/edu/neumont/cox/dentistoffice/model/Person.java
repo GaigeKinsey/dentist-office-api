@@ -11,6 +11,8 @@ public class Person extends Clinic {
 	private int uniqueId;
 	private String email;
 	private PhoneNumber phone;
+	
+	public Person() {}
 
 	public Person(String firstName, String lastName, int uniqueId, String email, PhoneNumber phone) {
 		this.setFirstName(firstName);

@@ -1,6 +1,11 @@
 package edu.neumont.cox.dentistoffice.model;
 
-public class CardNumber {
+public class CardNumber extends PaymentCard{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int numberOne;
 	private int numberTwo;
 	private int numberThree;

@@ -2,12 +2,19 @@ package edu.neumont.cox.dentistoffice.model;
 
 import java.time.LocalDate;
 
-public class PaymentCard {
+public class PaymentCard extends Person{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private CardNumber cardNumber;
 	private LocalDate expireDate;
 	private String name;
 	private int cvv;
 	private int zipCode;
+	
+	public PaymentCard() {}
 	
 	public PaymentCard(CardNumber cardNumber, LocalDate expireDate, String name, int cvv, int zipcode) {
 		this.setCardNumber(cardNumber);
