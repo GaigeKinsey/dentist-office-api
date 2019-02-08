@@ -28,7 +28,6 @@ public class DentistController {
 	}
 
 	public void run() {
-//		getExpireDate();
 		try {
 			database.load();
 			clinic = (Clinic) database.get(0);
