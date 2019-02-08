@@ -93,7 +93,7 @@ public class DentistController {
 				break;
 			// Schedule an appointment
 			case 2:
-
+				scheduleAppointment();
 				break;
 			// Add someone
 			case 3:
@@ -119,6 +119,17 @@ public class DentistController {
 				database.clear();
 			}
 		} while (isRunning);
+	}
+
+	private void scheduleAppointment() {
+		int choice = userInteraction.scheduleForPatients();
+		
+		switch(choice) {
+		case 1:
+			addPatient();
+		case 2:		
+		}
+		
 	}
 
 	private void searchMenu() {
@@ -245,81 +256,98 @@ public class DentistController {
 		int addSelection = userInteraction.addSomeoneSubMenu();
 		if (addSelection != 0) {
 
-			// We get the names for each option, might as well get them once here.
-			String firstName = userInteraction.getFirstName();
-			String lastName = userInteraction.getLastName();
 			switch (addSelection) {
 			case 1:
-				if (currentUser.getRole() == UserRole.Administrative) {
-					String username = userInteraction.getUsername();
-					String password = userInteraction.createPassword();
-					UserRole role = null;
-
-					int roleChoice = userInteraction.userRoleChoice();
-					if (roleChoice == 1) {
-						role = UserRole.Administrative;
-					} else {
-						role = UserRole.Standard;
-					}
-
-					clinic.addUser(new User(username, password, firstName, lastName, role));
-				} else {
-					userInteraction.noPermission();
-				}
+				addUser();
 				break;
-
 			// patient
 			case 2:
-				int uniqueId = userInteraction.getUniqueId();
-				String email = userInteraction.getEmail();
-
-				PhoneNumber phone = getPhoneNumber();
-
-				// Insurance Provider
-				userInteraction.insuranceProviderPrompt();
-				String companyName = userInteraction.getCompanyName();
-				String groupId = userInteraction.getGroupId();
-				String memberId = userInteraction.getMemberId();
-				InsuranceInfo insurance = new InsuranceInfo(companyName, groupId, memberId);
-
-				// Payment Card
-				userInteraction.paymentCardPrompt();
-				CardNumber cardNumber = getCardNumber();
-				// Didn't mess with this part that much, just stubbed out the UI method
-				LocalDate expireDate = userInteraction.getExpireDate();
-				String holderName = userInteraction.getHolderName();
-				int cvv = userInteraction.getCVV();
-				int zipCode = userInteraction.getZipCode();
-				PaymentCard card = new PaymentCard(cardNumber, expireDate, holderName, cvv, zipCode);
-
-				// adds patient
-				clinic.addPatient(new Patient(firstName, lastName, uniqueId, email, phone, insurance, card));
+				addPatient();
 				break;
 			// provider
 			case 3:
-				int proUniqueId = userInteraction.getUniqueId();
-				String proEmail = userInteraction.getEmail();
-				PhoneNumber proPhone = getPhoneNumber();
-
-				ProviderType title = null;
-
-				int roleChoice = userInteraction.getProviderType();
-				if (roleChoice == 1) {
-					title = ProviderType.Assistant;
-				} else if (roleChoice == 2) {
-					title = ProviderType.Dentist;
-				} else {
-					title = ProviderType.Hygienist;
-				}
-
-				// addsProvider
-				clinic.addProvider(new Provider(firstName, lastName, proUniqueId, proEmail, proPhone, title));
+				addProvider();
 				break;
 			}
 		}
 	}
+	
+	private void addUser() {
+		if (currentUser.getRole() == UserRole.Administrative) {
+			// We get the names for each option, might as well get them once here.
+			String firstName = userInteraction.getFirstName();
+			String lastName = userInteraction.getLastName();
+			String username = userInteraction.getUsername();
+			String password = userInteraction.createPassword();
+			UserRole role = null;
 
-	public void removeSomeone() {
+			int roleChoice = userInteraction.userRoleChoice();
+			if (roleChoice == 1) {
+				role = UserRole.Administrative;
+			} else {
+				role = UserRole.Standard;
+			}
+
+			clinic.addUser(new User(username, password, firstName, lastName, role));
+		} else {
+			userInteraction.noPermission();
+		}
+	}
+	
+	private void addPatient() {
+		// We get the names for each option, might as well get them once here.
+		String firstName = userInteraction.getFirstName();
+		String lastName = userInteraction.getLastName();
+		int uniqueId = userInteraction.getUniqueId();
+		String email = userInteraction.getEmail();
+
+		PhoneNumber phone = getPhoneNumber();
+
+		// Insurance Provider
+		userInteraction.insuranceProviderPrompt();
+		String companyName = userInteraction.getCompanyName();
+		String groupId = userInteraction.getGroupId();
+		String memberId = userInteraction.getMemberId();
+		InsuranceInfo insurance = new InsuranceInfo(companyName, groupId, memberId);
+
+		// Payment Card
+		userInteraction.paymentCardPrompt();
+		CardNumber cardNumber = getCardNumber();
+		// Didn't mess with this part that much, just stubbed out the UI method
+		LocalDate expireDate = userInteraction.getExpireDate();
+		String holderName = userInteraction.getHolderName();
+		int cvv = userInteraction.getCVV();
+		int zipCode = userInteraction.getZipCode();
+		PaymentCard card = new PaymentCard(cardNumber, expireDate, holderName, cvv, zipCode);
+
+		// adds patient
+		clinic.addPatient(new Patient(firstName, lastName, uniqueId, email, phone, insurance, card));
+	}
+	
+	private void addProvider() {
+		// We get the names for each option, might as well get them once here.
+		String firstName = userInteraction.getFirstName();
+		String lastName = userInteraction.getLastName();
+		int proUniqueId = userInteraction.getUniqueId();
+		String proEmail = userInteraction.getEmail();
+		PhoneNumber proPhone = getPhoneNumber();
+
+		ProviderType title = null;
+
+		int roleChoice = userInteraction.getProviderType();
+		if (roleChoice == 1) {
+			title = ProviderType.Assistant;
+		} else if (roleChoice == 2) {
+			title = ProviderType.Dentist;
+		} else {
+			title = ProviderType.Hygienist;
+		}
+
+		// addsProvider
+		clinic.addProvider(new Provider(firstName, lastName, proUniqueId, proEmail, proPhone, title));
+	}
+
+	private void removeSomeone() {
 		int remSelection = userInteraction.removeSomeoneSubMenu();
 
 		switch (remSelection) {

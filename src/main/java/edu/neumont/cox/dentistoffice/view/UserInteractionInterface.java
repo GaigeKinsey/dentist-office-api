@@ -89,4 +89,6 @@ public interface UserInteractionInterface {
 
 	void invalidCard();
 
+	int scheduleForPatients();
+
 }
