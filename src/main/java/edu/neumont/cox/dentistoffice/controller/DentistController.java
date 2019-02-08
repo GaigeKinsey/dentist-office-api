@@ -1,7 +1,6 @@
 package edu.neumont.cox.dentistoffice.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +28,7 @@ public class DentistController {
 	}
 
 	public void run() {
+//		getExpireDate();
 		try {
 			database.load();
 			clinic = (Clinic) database.get(0);
@@ -123,13 +123,12 @@ public class DentistController {
 
 	private void scheduleAppointment() {
 		int choice = userInteraction.scheduleForPatients();
-		
-		switch(choice) {
+
+		switch (choice) {
 		case 1:
 			addPatient();
-		case 2:		
+		case 2:
 		}
-		
 	}
 
 	private void searchMenu() {
@@ -271,7 +270,7 @@ public class DentistController {
 			}
 		}
 	}
-	
+
 	private void addUser() {
 		if (currentUser.getRole() == UserRole.Administrative) {
 			// We get the names for each option, might as well get them once here.
@@ -293,7 +292,7 @@ public class DentistController {
 			userInteraction.noPermission();
 		}
 	}
-	
+
 	private void addPatient() {
 		// We get the names for each option, might as well get them once here.
 		String firstName = userInteraction.getFirstName();
@@ -314,7 +313,7 @@ public class DentistController {
 		userInteraction.paymentCardPrompt();
 		CardNumber cardNumber = getCardNumber();
 		// Didn't mess with this part that much, just stubbed out the UI method
-		LocalDate expireDate = userInteraction.getExpireDate();
+		String expireDate = getExpireDate();
 		String holderName = userInteraction.getHolderName();
 		int cvv = userInteraction.getCVV();
 		int zipCode = userInteraction.getZipCode();
@@ -323,14 +322,14 @@ public class DentistController {
 		// adds patient
 		clinic.addPatient(new Patient(firstName, lastName, uniqueId, email, phone, insurance, card));
 	}
-	
+
 	private void addProvider() {
 		// We get the names for each option, might as well get them once here.
 		String firstName = userInteraction.getFirstName();
 		String lastName = userInteraction.getLastName();
-		int proUniqueId = userInteraction.getUniqueId();
-		String proEmail = userInteraction.getEmail();
-		PhoneNumber proPhone = getPhoneNumber();
+		int uniqueId = userInteraction.getUniqueId();
+		String email = userInteraction.getEmail();
+		PhoneNumber phone = getPhoneNumber();
 
 		ProviderType title = null;
 
@@ -344,7 +343,7 @@ public class DentistController {
 		}
 
 		// addsProvider
-		clinic.addProvider(new Provider(firstName, lastName, proUniqueId, proEmail, proPhone, title));
+		clinic.addProvider(new Provider(firstName, lastName, uniqueId, email, phone, title));
 	}
 
 	private void removeSomeone() {
@@ -396,7 +395,7 @@ public class DentistController {
 
 		return new PhoneNumber(firstThreeDigits, secondThreeDigits, lastFourDigits);
 	}
-	
+
 	private CardNumber getCardNumber() {
 		boolean valid = false;
 		int numberOne = 0;
@@ -420,6 +419,25 @@ public class DentistController {
 			}
 		} while (!valid);
 		return new CardNumber(numberOne, numberTwo, numberThree, numberFour);
+	}
+
+	private String getExpireDate() {
+		String rawExpireDate = "";
+		boolean valid = false;
+		do {
+			rawExpireDate = userInteraction.getExpireDate();
+			if (rawExpireDate.length() == 5) {
+				if (rawExpireDate.matches("\\d\\d/\\d\\d")) {
+					valid = true;
+				} else {
+					userInteraction.invalidExpireDate();
+				}
+			} else {
+				userInteraction.invalidExpireDate();
+			}
+		} while (!valid);
+
+		return rawExpireDate;
 	}
 
 	private void generateReports() {

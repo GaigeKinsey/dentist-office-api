@@ -16,7 +16,7 @@ public class Procedure {
 	}
 
 	public void setCode(String code) {
-		this.code = code;
+		this.code = "D" + code;
 	}
 
 	public String getDescription() {

@@ -1,6 +1,5 @@
 package edu.neumont.cox.dentistoffice.view;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import edu.neumont.cox.dentistoffice.model.Patient;
@@ -55,8 +54,6 @@ public interface UserInteractionInterface {
 
 	String getCardNumber();
 
-	LocalDate getExpireDate();
-
 	String getHolderName();
 
 	int getCVV();
@@ -84,11 +81,14 @@ public interface UserInteractionInterface {
 	int getProviderSearchSelection(List<Provider> matchedProviders);
 
 	String getPhoneNumberString();
-
+	
 	void invalidPhone();
 
 	void invalidCard();
+	
+	void invalidExpireDate();
 
 	int scheduleForPatients();
 
+	String getExpireDate();
 }

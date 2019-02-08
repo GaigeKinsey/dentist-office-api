@@ -1,7 +1,5 @@
 package edu.neumont.cox.dentistoffice.model;
 
-import java.time.LocalDate;
-
 public class PaymentCard extends Person{
 	/**
 	 * 
@@ -9,14 +7,14 @@ public class PaymentCard extends Person{
 	private static final long serialVersionUID = 1L;
 	
 	private CardNumber cardNumber;
-	private LocalDate expireDate;
+	private String expireDate;
 	private String name;
 	private int cvv;
 	private int zipCode;
 	
 	public PaymentCard() {}
 	
-	public PaymentCard(CardNumber cardNumber, LocalDate expireDate, String name, int cvv, int zipcode) {
+	public PaymentCard(CardNumber cardNumber, String expireDate, String name, int cvv, int zipcode) {
 		this.setCardNumber(cardNumber);
 		this.setExpireDate(expireDate);
 		this.setName(name);
@@ -32,11 +30,11 @@ public class PaymentCard extends Person{
 		this.cardNumber = cardNumber;
 	}
 
-	public LocalDate getExpireDate() {
+	public String getExpireDate() {
 		return expireDate;
 	}
 
-	public void setExpireDate(LocalDate expireDate) {
+	public void setExpireDate(String expireDate) {
 		this.expireDate = expireDate;
 	}
 
