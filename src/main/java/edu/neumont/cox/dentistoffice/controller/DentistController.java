@@ -2,6 +2,7 @@ package edu.neumont.cox.dentistoffice.controller;
 
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -229,8 +230,23 @@ public class DentistController {
 	}
 
 	private Clinic searchApointment() {
-		// TODO Auto-generated method stub
-		return null;
+		Clinic selectedObject = null;
+
+		LocalDateTime startDateTime = startDate();
+		LocalDateTime endDateTime = endDate();
+		userInteraction.notifySearchingPatient();
+		Patient patient = (Patient) searchPatient();
+		userInteraction.notifySearchingProvider();
+		Provider provider = (Provider) searchProvider();
+//		Procedure procedure;
+
+		List<Appointment> matchedAppointments = meetsAppointmentSearch(startDateTime, endDateTime, patient, provider);
+		int providerSelection = userInteraction.getAppointmentSearchSelection(matchedAppointments) - 1;
+		if (providerSelection >= 0) {
+			selectedObject = matchedAppointments.get(providerSelection);
+		}
+
+		return selectedObject;
 	}
 
 	// User - meetSearch
@@ -269,6 +285,18 @@ public class DentistController {
 		return matchedProviders;
 	}
 
+	private List<Appointment> meetsAppointmentSearch(LocalDateTime startDateTime, LocalDateTime endDateTime,
+			Patient patient, Provider provider) {
+		List<Appointment> matchedAppointment = new ArrayList<>();
+		for (Appointment appointment : clinic.getAppointments()) {
+			if (appointment.getDateTime().isAfter(startDateTime) && appointment.getDateTime().isBefore(endDateTime)
+					&& appointment.getPatient().equals(patient) && appointment.getProviders().containsValue(provider)) {
+				matchedAppointment.add(appointment);
+			}
+		}	
+		return matchedAppointment;
+	}
+
 	private void scheduleAppointment() {
 		// Get the patient
 		int patientChoice = userInteraction.scheduleForPatients();
@@ -305,7 +333,7 @@ public class DentistController {
 				do {
 					int year = userInteraction.getYear();
 					int month = userInteraction.getMonth();
-					int dayOfMonth = userInteraction.getDayOfMonth();
+					int dayOfMonth = userInteraction.getDayOfMonth(month);
 					int hour = userInteraction.getHour();
 					int minute = userInteraction.getMinute();
 					try {
@@ -514,18 +542,57 @@ public class DentistController {
 
 			// production
 			case 1:
-
+				productionReport();
 				break;
 			// Patient Balance
 			case 2:
-
+				patientBalanceReport();
 				break;
 			// Collections
 			case 3:
-
+				collectionReport();
 				break;
 			}
 		}
+	}
+
+	private void productionReport() {
+		LocalDateTime startDate = startDate();
+		LocalDateTime endDate = endDate();
+		boolean groupBy = userInteraction.groupBySelection();
+		//total charges for the entire month(s)
+		if (groupBy) {
+
+		} else {
+			//total charges for each day(s)
+			
+		}
+
+	}
+
+	private void patientBalanceReport() {
+		boolean sortBy = userInteraction.sortBySelection();
+		//Largest patient balance to smallest balance
+		if(sortBy) {
+			
+		} else {
+			//sorts balance by name
+			
+		}
+
+	}
+
+	private void collectionReport() {
+		LocalDateTime startDate = startDate();
+		LocalDateTime endDate = endDate();
+		boolean groupBy = userInteraction.groupBySelection();
+		//total money collected for the given month(s)
+		if (groupBy) {
+
+		} else {
+			//total money collected for the given day(s)
+		}
+
 	}
 
 	private void userSettings() {
@@ -583,6 +650,38 @@ public class DentistController {
 			}
 		} while (!valid);
 		currentUser.changePassword(newPass);
+	}
+
+	private LocalDateTime startDate() {
+
+		LocalDateTime startDate = null;
+
+		userInteraction.askForStartDate();
+		int year = userInteraction.getYear();
+		int month = userInteraction.getMonth();
+		int dayOfMonth = userInteraction.getDayOfMonth(month);
+		int hour = userInteraction.getHour();
+		int minute = userInteraction.getMinute();
+
+		startDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+
+		return startDate;
+	}
+
+	private LocalDateTime endDate() {
+
+		LocalDateTime endDate = null;
+
+		userInteraction.askForEndDate();
+		int year = userInteraction.getYear();
+		int month = userInteraction.getMonth();
+		int dayOfMonth = userInteraction.getDayOfMonth(month);
+		int hour = userInteraction.getHour();
+		int minute = userInteraction.getMinute();
+
+		endDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+
+		return endDate;
 	}
 
 }

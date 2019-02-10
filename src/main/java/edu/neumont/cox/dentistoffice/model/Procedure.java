@@ -4,21 +4,22 @@ package edu.neumont.cox.dentistoffice.model;
  * @author Chris and Gaige
  *
  */
-public class Procedure extends Appointment{
+public class Procedure extends Appointment {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private String code;
 	private String description;
 	private double cost;
-	
+
 	/**
 	 * 
 	 */
-	public Procedure() {}
-	
+	public Procedure() {
+	}
+
 	public Procedure(String code, String description, double cost) {
 		this.setCode(code);
 		this.setDescription(description);
@@ -65,5 +66,11 @@ public class Procedure extends Appointment{
 	 */
 	public void setCost(double cost) {
 		this.cost = cost;
+	}
+
+	@Override
+	public String toString() {
+		return "Procedure Code: " + this.getProcedures() + ", Description: " + this.getDescription() + ", Cost: "
+				+ this.getCost();
 	}
 }

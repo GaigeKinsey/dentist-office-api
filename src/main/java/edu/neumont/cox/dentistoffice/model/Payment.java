@@ -61,6 +61,11 @@ public class Payment {
 	public void setSource(Sources source) {
 		this.source = source;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Source: " + this.getSource().toString() + ", Amount: " + this.getAmount() + ", Patient: "
+				+ this.getPatient().getFirstName() + " " + this.getPatient().getLastName();
+	}
+
 }

@@ -9,20 +9,21 @@ import java.util.Map;
  * @author Chris and Gaige
  *
  */
-public class Appointment extends Clinic{
+public class Appointment extends Clinic {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Patient patient;
 	private Map<Provider, List<Procedure>> procedures = new HashMap<>();
 	private LocalDateTime dateTime;
-	
+
 	/**
 	 * 
 	 */
-	public Appointment() {}
+	public Appointment() {
+	}
 
 	/**
 	 * @param patient
@@ -35,7 +36,7 @@ public class Appointment extends Clinic{
 		this.addProcedures(provider, procedures);
 		this.setDateTime(dateTime);
 	}
-	
+
 	/**
 	 * @return
 	 */
@@ -56,7 +57,7 @@ public class Appointment extends Clinic{
 	public Map<Provider, List<Procedure>> getProcedures() {
 		return procedures;
 	}
-	
+
 	/**
 	 * @param provider
 	 * @param procedures
@@ -84,5 +85,12 @@ public class Appointment extends Clinic{
 	 */
 	public void setDateTime(LocalDateTime dateTime) {
 		this.dateTime = dateTime;
+	}
+
+	@Override
+	public String toString() {
+		return "Date/Time: " + this.getDateTime() + ", Patient: " + this.getPatient().getFirstName() + " "
+				+ this.getPatient().getLastName() + ", Provider: " + this.getProviders().toString() + ", Procedure: "
+				+ this.getProcedures().toString();
 	}
 }

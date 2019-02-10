@@ -2,6 +2,7 @@ package edu.neumont.cox.dentistoffice.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,12 +13,14 @@ import java.util.Map;
  *
  */
 public class Clinic implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private List<Payment> payments = new ArrayList<>();
-	
+
 	private List<Appointment> appointments = new ArrayList<>();
+
+//	Map<LocalDateTime, Appointment> appointment = new HashMap<>();
 
 	Map<String, User> users = new HashMap<>();
 	Map<String, Provider> providers = new HashMap<>();

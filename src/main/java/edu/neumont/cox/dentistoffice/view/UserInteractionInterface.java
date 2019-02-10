@@ -2,6 +2,7 @@ package edu.neumont.cox.dentistoffice.view;
 
 import java.util.List;
 
+import edu.neumont.cox.dentistoffice.model.Appointment;
 import edu.neumont.cox.dentistoffice.model.Patient;
 import edu.neumont.cox.dentistoffice.model.Provider;
 import edu.neumont.cox.dentistoffice.model.User;
@@ -12,7 +13,6 @@ import edu.neumont.cox.dentistoffice.model.User;
  */
 public interface UserInteractionInterface {
 
-	
 	/**
 	 * @return
 	 */
@@ -28,17 +28,17 @@ public interface UserInteractionInterface {
 	 * @return
 	 */
 	boolean checkPassword(String password);
-	
+
 	/**
 	 * 
 	 */
 	void passwordMismatch();
-	
+
 	/**
 	 * 
 	 */
 	void dentistOfficeGreeting();
-	
+
 	/**
 	 * @return
 	 */
@@ -58,17 +58,17 @@ public interface UserInteractionInterface {
 	 * 
 	 */
 	void invalidUser();
-	
+
 	/**
 	 * @return
 	 */
 	int addSomeoneSubMenu();
-	
+
 	/**
 	 * @return
 	 */
 	int removeSomeoneSubMenu();
-	
+
 	/**
 	 * @return
 	 */
@@ -178,7 +178,7 @@ public interface UserInteractionInterface {
 	 * @return
 	 */
 	String getSearchCompanyName();
-	
+
 	/**
 	 * @param matchedUsers
 	 * @return
@@ -201,7 +201,7 @@ public interface UserInteractionInterface {
 	 * @return
 	 */
 	String getPhoneNumberString();
-	
+
 	/**
 	 * 
 	 */
@@ -211,7 +211,7 @@ public interface UserInteractionInterface {
 	 * 
 	 */
 	void invalidCard();
-	
+
 	/**
 	 * 
 	 */
@@ -226,7 +226,7 @@ public interface UserInteractionInterface {
 	 * @return
 	 */
 	String getExpireDate();
-	
+
 	/**
 	 * @return
 	 */
@@ -280,7 +280,7 @@ public interface UserInteractionInterface {
 	/**
 	 * @return
 	 */
-	int getDayOfMonth();
+	int getDayOfMonth(int month);
 
 	/**
 	 * @return
@@ -311,4 +311,30 @@ public interface UserInteractionInterface {
 	 * 
 	 */
 	void invalidAppointmentDate();
+
+	/**
+	 * @param matchedAppointments
+	 * @return
+	 */
+	int getAppointmentSearchSelection(List<Appointment> matchedAppointments);
+
+	/**
+	 * 
+	 */
+	void askForStartDate();
+
+	/**
+	 * 
+	 */
+	void askForEndDate();
+
+	/**
+	 * @return
+	 */
+	boolean groupBySelection();
+
+	/**
+	 * @return
+	 */
+	boolean sortBySelection();
 }
