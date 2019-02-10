@@ -261,11 +261,17 @@ public class DentistController {
 		switch (choice) {
 		case 1:
 			addPatient();
+			addAppointment();
 		case 2:
-			Patient patient = (Patient) search(2);
-			
+			addAppointment();
 			
 		}
+	}
+
+	private void addAppointment() {
+		// TODO Auto-generated method stub
+		Patient patient = (Patient) search(2);
+		
 	}
 
 	private void addSomeone() {
