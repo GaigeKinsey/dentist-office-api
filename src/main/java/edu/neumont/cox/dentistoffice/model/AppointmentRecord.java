@@ -6,6 +6,11 @@ import java.util.List;
 
 public class AppointmentRecord extends Appointment{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private List<ProcedureRecord> procedures = new ArrayList<>();
 
 	public AppointmentRecord(LocalDateTime dateTime, List<ProcedureRecord> procedures) {

@@ -45,8 +45,4 @@ public class ProcedureRecord {
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
-	
-	
-	
-	
 }

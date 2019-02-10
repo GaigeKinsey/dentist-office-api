@@ -91,4 +91,16 @@ public interface UserInteractionInterface {
 	int scheduleForPatients();
 
 	String getExpireDate();
+	
+	int changeUserPassword();
+
+	boolean changePasswordDecision();
+
+	String changePassword();
+
+	String getProcedureCode();
+
+	String getProcedureDescription();
+
+	Double getProcedureCost();
 }

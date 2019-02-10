@@ -106,9 +106,12 @@ public class DentistController {
 			case 5:
 				generateReports();
 				break;
-
+			// User Settings
+			case 6: 
+				userSettings();
+				break;
 			// Save
-			case 6:
+			case 7:
 				database.add(clinic);
 				try {
 					database.save();
@@ -116,18 +119,12 @@ public class DentistController {
 					e.printStackTrace();
 				}
 				database.clear();
+				break;
+			default:
+				System.out.println("This shouldn't have happened");
+				break;
 			}
 		} while (isRunning);
-	}
-
-	private void scheduleAppointment() {
-		int choice = userInteraction.scheduleForPatients();
-
-		switch (choice) {
-		case 1:
-			addPatient();
-		case 2:
-		}
 	}
 
 	private void searchMenu() {
@@ -148,10 +145,13 @@ public class DentistController {
 		case 2:
 			selectedObject = searchPatient();
 			break;
-
 		// Providers
 		case 3:
 			selectedObject = searchProvider();
+			break;
+			
+		case 4:
+			selectedObject = searchApointment();
 			break;
 		}
 		return selectedObject;
@@ -213,6 +213,11 @@ public class DentistController {
 
 		return selectedObject;
 	}
+	
+	private Clinic searchApointment() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	// User - meetSearch
 	private List<User> meetsUserSearch(String firstName, String lastName, String username) {
@@ -249,12 +254,26 @@ public class DentistController {
 		}
 		return matchedProviders;
 	}
+	
+	private void scheduleAppointment() {
+		int choice = userInteraction.scheduleForPatients();
+
+		switch (choice) {
+		case 1:
+			addPatient();
+		case 2:
+			Patient patient = (Patient) search(2);
+			
+			
+		}
+	}
 
 	private void addSomeone() {
 		int addSelection = userInteraction.addSomeoneSubMenu();
 		if (addSelection != 0) {
 
 			switch (addSelection) {
+			// user
 			case 1:
 				addUser();
 				break;
@@ -455,4 +474,62 @@ public class DentistController {
 			}
 		}
 	}
+	
+	private void userSettings() {
+		if(currentUser.getRole().equals(UserRole.Administrative)) {
+			adminUserSettings();
+		} else {
+			standardUserSettings();
+		}
+	}
+
+	private void standardUserSettings() {
+		boolean choice = userInteraction.changePasswordDecision();
+		
+		if(choice) {
+			changePassword();
+		}
+		
+	}
+
+	private void adminUserSettings() {
+		int option = userInteraction.changeUserPassword();
+		
+		switch(option) {
+		//Change admin password
+		case 1:
+			changePassword();
+			break;
+		//Change another user's password	
+		case 2:
+			User user = (User) search(1);
+			String newPass = "";
+			boolean valid = false;
+			do {
+				newPass = userInteraction.changePassword();
+				valid = userInteraction.checkPassword(newPass);
+				if (!valid) {
+					userInteraction.passwordMismatch();
+				}
+			} while (!valid);
+			user.changePassword(newPass);
+			break;
+			
+			//nullpointer doesn't exit back to main menu when selecting 0 
+		}		
+	}
+	
+	private void changePassword() {
+		String newPass = "";
+		boolean valid = false;
+		do {
+			newPass = userInteraction.changePassword();
+			valid = userInteraction.checkPassword(newPass);
+			if (!valid) {
+				userInteraction.passwordMismatch();
+			}
+		} while (!valid);
+		currentUser.changePassword(newPass);	
+	}
+
 }
