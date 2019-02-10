@@ -103,4 +103,26 @@ public interface UserInteractionInterface {
 	String getProcedureDescription();
 
 	Double getProcedureCost();
+
+	int scheduleForProviders();
+
+	boolean addMoreProcedures();
+
+	int getYear();
+
+	int getMonth();
+
+	int getDayOfMonth();
+
+	int getHour();
+
+	int getMinute();
+
+	boolean addMoreProviders();
+
+	void notifySearchingProvider();
+
+	void notifySearchingPatient();
+
+	void invalidAppointmentDate();
 }

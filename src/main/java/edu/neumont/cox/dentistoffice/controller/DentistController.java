@@ -1,15 +1,19 @@
 package edu.neumont.cox.dentistoffice.controller;
 
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.neumont.cox.dentistoffice.model.Appointment;
 import edu.neumont.cox.dentistoffice.model.CardNumber;
 import edu.neumont.cox.dentistoffice.model.Clinic;
 import edu.neumont.cox.dentistoffice.model.InsuranceInfo;
 import edu.neumont.cox.dentistoffice.model.Patient;
 import edu.neumont.cox.dentistoffice.model.PaymentCard;
 import edu.neumont.cox.dentistoffice.model.PhoneNumber;
+import edu.neumont.cox.dentistoffice.model.Procedure;
 import edu.neumont.cox.dentistoffice.model.Provider;
 import edu.neumont.cox.dentistoffice.model.ProviderType;
 import edu.neumont.cox.dentistoffice.model.User;
@@ -107,7 +111,7 @@ public class DentistController {
 				generateReports();
 				break;
 			// User Settings
-			case 6: 
+			case 6:
 				userSettings();
 				break;
 			// Save
@@ -149,7 +153,7 @@ public class DentistController {
 		case 3:
 			selectedObject = searchProvider();
 			break;
-			
+
 		case 4:
 			selectedObject = searchApointment();
 			break;
@@ -213,7 +217,7 @@ public class DentistController {
 
 		return selectedObject;
 	}
-	
+
 	private Clinic searchApointment() {
 		// TODO Auto-generated method stub
 		return null;
@@ -254,24 +258,57 @@ public class DentistController {
 		}
 		return matchedProviders;
 	}
-	
+
 	private void scheduleAppointment() {
-		int choice = userInteraction.scheduleForPatients();
-
-		switch (choice) {
-		case 1:
-			addPatient();
-			addAppointment();
-		case 2:
-			addAppointment();
-			
+		// Get the patient
+		int patientChoice = userInteraction.scheduleForPatients();
+		if (patientChoice != 0) {
+			Patient patient = null;
+			if (patientChoice == 1) {
+				addPatient();
+			}
+			userInteraction.notifySearchingPatient();
+			patient = (Patient) searchPatient();
+			boolean addingProviders = false;
+			do {
+				// Get the provider
+				Provider provider = null;
+				int providerChoice = userInteraction.scheduleForProviders();
+				if (providerChoice == 1) {
+					addProvider();
+				}
+				userInteraction.notifySearchingProvider();
+				provider = (Provider) searchProvider();
+				// Get the procedures
+				List<Procedure> procedures = new ArrayList<>();
+				boolean addingProcedures = true;
+				do {
+					String code = userInteraction.getProcedureCode();
+					String description = userInteraction.getProcedureDescription();
+					Double cost = userInteraction.getProcedureCost();
+					procedures.add(new Procedure(code, description, cost));
+					addingProcedures = userInteraction.addMoreProcedures();
+				} while (addingProcedures);
+				// Get time
+				LocalDateTime dateTime = null;
+				boolean validTime = false;
+				do {
+					int year = userInteraction.getYear();
+					int month = userInteraction.getMonth();
+					int dayOfMonth = userInteraction.getDayOfMonth();
+					int hour = userInteraction.getHour();
+					int minute = userInteraction.getMinute();
+					try {
+						dateTime = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+						validTime = true;
+					} catch (DateTimeException dte) {
+						userInteraction.invalidAppointmentDate();
+					}
+				} while (!validTime);
+				clinic.getAppointments().add(new Appointment(patient, provider, procedures, dateTime));
+				addingProviders = userInteraction.addMoreProviders();
+			} while (addingProviders);
 		}
-	}
-
-	private void addAppointment() {
-		// TODO Auto-generated method stub
-		Patient patient = (Patient) search(2);
-		
 	}
 
 	private void addSomeone() {
@@ -480,9 +517,9 @@ public class DentistController {
 			}
 		}
 	}
-	
+
 	private void userSettings() {
-		if(currentUser.getRole().equals(UserRole.Administrative)) {
+		if (currentUser.getRole().equals(UserRole.Administrative)) {
 			adminUserSettings();
 		} else {
 			standardUserSettings();
@@ -491,40 +528,40 @@ public class DentistController {
 
 	private void standardUserSettings() {
 		boolean choice = userInteraction.changePasswordDecision();
-		
-		if(choice) {
+
+		if (choice) {
 			changePassword();
 		}
-		
+
 	}
 
 	private void adminUserSettings() {
 		int option = userInteraction.changeUserPassword();
-		
-		switch(option) {
-		//Change admin password
+
+		switch (option) {
+		// Change admin password
 		case 1:
 			changePassword();
 			break;
-		//Change another user's password	
+		// Change another user's password
 		case 2:
 			User user = (User) search(1);
-			String newPass = "";
-			boolean valid = false;
-			do {
-				newPass = userInteraction.changePassword();
-				valid = userInteraction.checkPassword(newPass);
-				if (!valid) {
-					userInteraction.passwordMismatch();
-				}
-			} while (!valid);
-			user.changePassword(newPass);
-			break;
-			
-			//nullpointer doesn't exit back to main menu when selecting 0 
-		}		
+			if (user != null) {
+				String newPass = "";
+				boolean valid = false;
+				do {
+					newPass = userInteraction.changePassword();
+					valid = userInteraction.checkPassword(newPass);
+					if (!valid) {
+						userInteraction.passwordMismatch();
+					}
+				} while (!valid);
+				user.changePassword(newPass);
+				break;
+			}
+		}
 	}
-	
+
 	private void changePassword() {
 		String newPass = "";
 		boolean valid = false;
@@ -535,7 +572,7 @@ public class DentistController {
 				userInteraction.passwordMismatch();
 			}
 		} while (!valid);
-		currentUser.changePassword(newPass);	
+		currentUser.changePassword(newPass);
 	}
 
 }

@@ -72,22 +72,6 @@ public class Clinic implements Serializable {
 		this.providers.put(provider.getLastName(), provider);
 	}
 
-	public List<Appointment> getFutureAppointments() {
-		return null;
-	}
-
-	public List<Appointment> getPastAppointments() {
-		return null;
-	}
-
-	public void receivePayment(Payment payment) {
-
-	}
-
-	public double getAccountBalance(int patientId) {
-		return 0;
-	}
-
 	// Reports - idk if you wanna go about it this way??
 	// Haven't thought this all the way through - I have void for now
 	public void productionReport(LocalDate startDate, LocalDate endDate, boolean groupBy) {
