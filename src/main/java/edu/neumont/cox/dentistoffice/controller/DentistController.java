@@ -21,16 +21,26 @@ import edu.neumont.cox.dentistoffice.model.UserRole;
 import edu.neumont.cox.dentistoffice.view.UserInteractionInterface;
 import edu.neumont.cox.savabledatabase.SavableDatabase;
 
+/**
+ * @author Chris and Gaige
+ *
+ */
 public class DentistController {
 	private Clinic clinic = new Clinic();
 	private SavableDatabase database = new SavableDatabase();
 	private UserInteractionInterface userInteraction;
 	private User currentUser;
 
+	/**
+	 * @param UI
+	 */
 	public DentistController(UserInteractionInterface UI) {
 		this.userInteraction = UI;
 	}
 
+	/**
+	 * 
+	 */
 	public void run() {
 		try {
 			database.load();

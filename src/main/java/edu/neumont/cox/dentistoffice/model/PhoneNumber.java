@@ -10,32 +10,55 @@ public class PhoneNumber extends Person{
 	private int secondThree;
 	private int lastFour;
 	
+	/**
+	 * @param firstThree
+	 * @param secondThree
+	 * @param lastFour
+	 */
 	public PhoneNumber(int firstThree, int secondThree, int lastFour) {
 		this.setFirstThree(firstThree);
 		this.setSecondThree(secondThree);
 		this.setLastFour(lastFour);
 	}
 
+	/**
+	 * @return
+	 */
 	public int getFirstThree() {
 		return firstThree;
 	}
 
+	/**
+	 * @param firstThree
+	 */
 	public void setFirstThree(int firstThree) {
 		this.firstThree = firstThree;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getSecondThree() {
 		return secondThree;
 	}
 
+	/**
+	 * @param secondThree
+	 */
 	public void setSecondThree(int secondThree) {
 		this.secondThree = secondThree;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getLastFour() {
 		return lastFour;
 	}
 
+	/**
+	 * @param lastFour
+	 */
 	public void setLastFour(int lastFour) {
 		this.lastFour = lastFour;
 	}
