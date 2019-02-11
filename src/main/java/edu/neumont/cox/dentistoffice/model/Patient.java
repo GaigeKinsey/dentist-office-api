@@ -13,6 +13,9 @@ public class Patient extends Person {
 
 	private InsuranceInfo insurance;
 	private PaymentCard paymentCard;
+	
+	private Double balanceDue = 0d;
+	private Double totalCharges = 0d;
 
 	/**
 	 * Overloaded constructor for Patient
@@ -58,11 +61,25 @@ public class Patient extends Person {
 	public void setPaymentCard(PaymentCard paymentCard) {
 		this.paymentCard = paymentCard;
 	}
+	
+	public Double getBalanceDue() {
+		return balanceDue;
+	}
+
+	public void setBalanceDue(Double balanceDue) {
+		this.balanceDue = balanceDue;
+	}
+
+	public Double getTotalCharges() {
+		return totalCharges;
+	}
+
+	public void setTotalCharges(Double totalCharges) {
+		this.totalCharges = totalCharges;
+	}
 
 	@Override
 	public String toString() {
-
 		return super.toString() + ", " + this.getInsurance().toString();
 	}
-
 }

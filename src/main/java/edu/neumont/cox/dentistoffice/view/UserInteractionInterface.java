@@ -388,4 +388,50 @@ public interface UserInteractionInterface {
 	 * @return a boolean that is true if largest to smallest, and false if by name
 	 */
 	boolean sortBySelection();
+
+	/**
+	 * Prints out the total charges between the given dates
+	 * @param i
+	 * @param total
+	 */
+	void printGroup(int i, int total, boolean groupBy);
+
+	/**
+	 * Prompts user for procedure code, this can be empty
+	 * @return String representing the procedure code
+	 */
+	String getSearchProcedureCode();
+
+	/**
+	 * Notifies user they did not select a patient
+	 */
+	void notifyNoPatient();
+
+	/**
+	 * Notifies user they did not select a provider
+	 */
+	void notifyNoProvider();
+
+	/**
+	 * Asks user if they want to search for a specific patient
+	 * @return boolean true if they do, false if not
+	 */
+	boolean searchForPatient();
+
+	/**
+	 * Asks user if they want to search for a specific provider
+	 * @return boolean true if they do, false if not
+	 */
+	boolean searchForProvider();
+
+	/**
+	 * Tells the user they are going to search for an appointment they want to charge to the patient
+	 */
+	void askForPatient();
+
+	/**
+	 * Tells the user that the patient payment record failed
+	 */
+	void recordPaymentFailed();
+	
 }

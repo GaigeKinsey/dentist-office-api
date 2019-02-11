@@ -1,5 +1,6 @@
 package edu.neumont.cox.dentistoffice.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -68,6 +69,7 @@ public class Appointment extends Clinic {
 
 	/**
 	 * adds the procedures to the procedure hashMap
+	 * 
 	 * @param provider
 	 * @param procedures
 	 */
@@ -77,6 +79,7 @@ public class Appointment extends Clinic {
 
 	/**
 	 * sets the passed through hashMap to Appointments procedure hashMap
+	 * 
 	 * @param procedures
 	 */
 	public void setProcedures(Map<Provider, List<Procedure>> procedures) {
@@ -85,6 +88,7 @@ public class Appointment extends Clinic {
 
 	/**
 	 * retrieves the localDateTime of Appointment
+	 * 
 	 * @return dateTime
 	 */
 	public LocalDateTime getDateTime() {
@@ -93,16 +97,25 @@ public class Appointment extends Clinic {
 
 	/**
 	 * sets the localDateTime to dateTime
+	 * 
 	 * @param dateTime
 	 */
 	public void setDateTime(LocalDateTime dateTime) {
 		this.dateTime = dateTime;
 	}
 
+	/**
+	 * retrieves the time of the appointment in LocalDate format
+	 * 
+	 * @return a LocalDate of the appointment
+	 */
+	public LocalDate getDate() {
+		return LocalDate.of(dateTime.getDayOfMonth(), dateTime.getMonthValue(), dateTime.getYear());
+	}
+
 	@Override
 	public String toString() {
 		return "Date/Time: " + this.getDateTime() + ", Patient: " + this.getPatient().getFirstName() + " "
-				+ this.getPatient().getLastName() + ", Provider: " + this.getProviders().toString() + ", Procedure: "
-				+ this.getProcedures().toString();
+				+ this.getPatient().getLastName() + ", Provider/Procedure: " + this.getProcedures().toString();
 	}
 }

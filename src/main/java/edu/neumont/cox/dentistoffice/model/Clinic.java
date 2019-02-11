@@ -1,8 +1,6 @@
 package edu.neumont.cox.dentistoffice.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +14,6 @@ public class Clinic implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<Payment> payments = new ArrayList<>();
-
 	private List<Appointment> appointments = new ArrayList<>();
 
 //	Map<LocalDateTime, Appointment> appointment = new HashMap<>();
@@ -25,24 +21,6 @@ public class Clinic implements Serializable {
 	Map<String, User> users = new HashMap<>();
 	Map<String, Provider> providers = new HashMap<>();
 	Map<String, Patient> patients = new HashMap<>();
-
-	/**
-	 * retrieves the list of payments
-	 * 
-	 * @return payments
-	 */
-	public List<Payment> getPayments() {
-		return payments;
-	}
-
-	/**
-	 * sets the new list of payments to the payments Array List
-	 * 
-	 * @param payments
-	 */
-	public void setPayments(List<Payment> payments) {
-		this.payments = payments;
-	}
 
 	/**
 	 * retrieves the list of Appointments
@@ -142,61 +120,4 @@ public class Clinic implements Serializable {
 	public void addProvider(Provider provider) {
 		this.providers.put(provider.getLastName(), provider);
 	}
-
-	// Reports - idk if you wanna go about it this way??
-	// Haven't thought this all the way through - I have void for now
-	/**
-	 * prints out the production report based on the criteria set by the user
-	 * 
-	 * @param startDate
-	 * @param endDate
-	 * @param groupBy
-	 */
-	public void productionReport(LocalDateTime startDate, LocalDateTime endDate, boolean groupBy) {
-
-		//total charges for the entire month(s)
-		if (groupBy) {
-
-		} else {
-			//total charges for each day(s)
-			
-		}
-		
-		
-	}
-
-	/**
-	 * prints out the patient balance report based on the criteria set by the user
-	 * 
-	 * @param sort
-	 */
-	public void patientBalanceReport(boolean sortBy) {
-
-		//Largest patient balance to smallest balance
-		if(sortBy) {
-			
-		} else {
-			//sorts balance by name
-			
-		}
-	}
-
-	/**
-	 * prints out the collections report based on the criteria set by the user
-	 * 
-	 * @param startDate
-	 * @param endDate
-	 * @param groupBy
-	 */
-	public void collectionsReport(LocalDateTime startDate, LocalDateTime endDate, boolean groupBy) {
-
-		//total money collected for the given month(s)
-		if (groupBy) {
-
-		} else {
-			//total money collected for the given day(s)
-		}
-		
-	}
-
 }

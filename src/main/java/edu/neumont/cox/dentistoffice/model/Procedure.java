@@ -76,7 +76,7 @@ public class Procedure extends Appointment {
 
 	@Override
 	public String toString() {
-		return "Procedure Code: " + this.getProcedures() + ", Description: " + this.getDescription() + ", Cost: "
+		return "Procedure Code: " + this.getCode() + ", Description: " + this.getDescription() + ", Cost: "
 				+ this.getCost();
 	}
 }

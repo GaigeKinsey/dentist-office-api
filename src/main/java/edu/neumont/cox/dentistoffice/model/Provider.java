@@ -46,5 +46,4 @@ public class Provider extends Person {
 	public String toString() {
 		return super.toString() + ", Title: " + this.getTitle().toString();
 	}
-
 }
