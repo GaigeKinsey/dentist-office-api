@@ -41,36 +41,19 @@ public class DentistController {
 		this.userInteraction = UI;
 	}
 
-	/**
-	 * 
-	 */
 	public void run() {
 		try {
 			database.load();
 			clinic = (Clinic) database.get(0);
-			login();
+			login(false);
 		} catch (ClassNotFoundException | IOException e) {
-			firstLogin();
+			clinic.addUser(
+					new User("Administrator", "1234Password", "Administrative", "User", UserRole.Administrative));
+			login(true);
 		}
 	}
 
-	private void firstLogin() {
-		currentUser = new User("Administrator", "1234Password", "Administrative", "User", UserRole.Administrative);
-		clinic.addUser(currentUser);
-		String newPass = "";
-		boolean valid = false;
-		do {
-			newPass = userInteraction.adminPasswordChange();
-			valid = userInteraction.checkPassword(newPass);
-			if (!valid) {
-				userInteraction.passwordMismatch();
-			}
-		} while (!valid);
-		currentUser.changePassword(newPass);
-		mainMenu();
-	}
-
-	private void login() {
+	private void login(boolean startup) {
 		boolean checkUser = false;
 
 		do {
@@ -91,6 +74,18 @@ public class DentistController {
 				userInteraction.invalidUser();
 			}
 		} while (!checkUser);
+		if (startup) {
+			String newPass = "";
+			boolean valid = false;
+			do {
+				newPass = userInteraction.adminPasswordChange();
+				valid = userInteraction.checkPassword(newPass);
+				if (!valid) {
+					userInteraction.passwordMismatch();
+				}
+			} while (!valid);
+			currentUser.changePassword(newPass);
+		}
 		mainMenu();
 	}
 
@@ -833,7 +828,7 @@ public class DentistController {
 		if (sortBy) {
 			// Largest patient balance to smallest balance
 			boolean matched = false;
-			//TODO
+			// TODO
 		} else {
 			// sorts balance by name
 		}
