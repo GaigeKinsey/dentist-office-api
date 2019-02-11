@@ -830,40 +830,12 @@ public class DentistController {
 
 	public void patientBalanceReport(boolean sortBy) {
 
-		// Largest patient balance to smallest balance
 		if (sortBy) {
+			// Largest patient balance to smallest balance
 			boolean matched = false;
-			int total = 0;
-			for (Appointment appointment : clinic.getAppointments()) {
-				if (appointment.getPatient().getTotalCharges() == 0) {
-					for (List<Procedure> procedures : appointment.getProcedures().values()) {
-						for (Procedure procedure : procedures) {
-							total += procedure.getCost();
-						}
-					}
-					matched = true;
-				}
-				if (matched) {
-					userInteraction.printSort(total, sortBy);
-				}
-			}
+			
 		} else {
 			// sorts balance by name
-			boolean matched = false;
-			int total = 0;
-			for (Appointment appointment : clinic.getAppointments()) {
-				if (appointment.getPatient().getTotalCharges() == 0) {
-					for (List<Procedure> procedures : appointment.getProcedures().values()) {
-						for (Procedure procedure : procedures) {
-							total += procedure.getCost();
-						}
-					}
-					matched = true;
-				}
-			}
-			if (matched) {
-				userInteraction.printSort(total, sortBy);
-			}
 		}
 	}
 
