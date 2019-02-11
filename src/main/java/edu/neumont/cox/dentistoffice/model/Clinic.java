@@ -27,13 +27,17 @@ public class Clinic implements Serializable {
 	Map<String, Patient> patients = new HashMap<>();
 
 	/**
-	 * @return
+	 * retrieves the list of payments
+	 * 
+	 * @return payments
 	 */
 	public List<Payment> getPayments() {
 		return payments;
 	}
 
 	/**
+	 * sets the new list of payments to the payments Array List
+	 * 
 	 * @param payments
 	 */
 	public void setPayments(List<Payment> payments) {
@@ -41,13 +45,17 @@ public class Clinic implements Serializable {
 	}
 
 	/**
-	 * @return
+	 * retrieves the list of Appointments
+	 * 
+	 * @return appointments
 	 */
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}
 
 	/**
+	 * sets the new list of appointments to the appointments Array List
+	 * 
 	 * @param appointments
 	 */
 	public void setAppointments(List<Appointment> appointments) {
@@ -55,13 +63,17 @@ public class Clinic implements Serializable {
 	}
 
 	/**
-	 * @return
+	 * retrieves the hashMap of Users
+	 * 
+	 * @return users
 	 */
 	public Map<String, User> getUsers() {
 		return users;
 	}
 
 	/**
+	 * sets the new hashMap of users
+	 * 
 	 * @param users
 	 */
 	public void setUsers(Map<String, User> users) {
@@ -69,13 +81,17 @@ public class Clinic implements Serializable {
 	}
 
 	/**
-	 * @return
+	 * retrieves the hashMap of providers
+	 * 
+	 * @return providers
 	 */
 	public Map<String, Provider> getProviders() {
 		return providers;
 	}
 
 	/**
+	 * sets the new hashMap of providers
+	 * 
 	 * @param providers
 	 */
 	public void setProviders(Map<String, Provider> providers) {
@@ -83,13 +99,17 @@ public class Clinic implements Serializable {
 	}
 
 	/**
-	 * @return
+	 * retrieves the hashMap of Patients
+	 * 
+	 * @return patients
 	 */
 	public Map<String, Patient> getPatients() {
 		return patients;
 	}
 
 	/**
+	 * sets the new hashMap of patients
+	 * 
 	 * @param patients
 	 */
 	public void setPatients(Map<String, Patient> patients) {
@@ -97,6 +117,8 @@ public class Clinic implements Serializable {
 	}
 
 	/**
+	 * adds the User that is passed through to the hashMap
+	 * 
 	 * @param user
 	 */
 	public void addUser(User user) {
@@ -104,6 +126,8 @@ public class Clinic implements Serializable {
 	}
 
 	/**
+	 * adds the Patient that is passed through to the hashMap
+	 * 
 	 * @param patient
 	 */
 	public void addPatient(Patient patient) {
@@ -111,6 +135,8 @@ public class Clinic implements Serializable {
 	}
 
 	/**
+	 * adds the Provider that is passed through to the hashMap
+	 * 
 	 * @param provider
 	 */
 	public void addProvider(Provider provider) {
@@ -120,6 +146,8 @@ public class Clinic implements Serializable {
 	// Reports - idk if you wanna go about it this way??
 	// Haven't thought this all the way through - I have void for now
 	/**
+	 * prints out the production report based on the criteria set by the user
+	 * 
 	 * @param startDate
 	 * @param endDate
 	 * @param groupBy
@@ -129,6 +157,8 @@ public class Clinic implements Serializable {
 	}
 
 	/**
+	 * prints out the patient balance report based on the criteria set by the user
+	 * 
 	 * @param sort
 	 */
 	public void patientBalanceReport(boolean sort) {
@@ -136,6 +166,8 @@ public class Clinic implements Serializable {
 	}
 
 	/**
+	 * prints out the collections report based on the criteria set by the user
+	 * 
 	 * @param startDate
 	 * @param endDate
 	 * @param groupBy

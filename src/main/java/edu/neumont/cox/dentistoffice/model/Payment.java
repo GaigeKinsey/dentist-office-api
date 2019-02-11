@@ -10,6 +10,7 @@ public class Payment {
 	private Sources source;
 
 	/**
+	 * Overloaded constructor for Payment
 	 * @param amount
 	 * @param patient
 	 * @param source

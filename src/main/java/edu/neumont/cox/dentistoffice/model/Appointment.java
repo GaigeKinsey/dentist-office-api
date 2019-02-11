@@ -20,12 +20,14 @@ public class Appointment extends Clinic {
 	private LocalDateTime dateTime;
 
 	/**
-	 * 
+	 * default constructor for Appointment
 	 */
 	public Appointment() {
 	}
 
 	/**
+	 * overloaded constructor for Appointment
+	 * 
 	 * @param patient
 	 * @param provider
 	 * @param procedures
@@ -38,13 +40,17 @@ public class Appointment extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * retrieves the patient object
+	 * 
+	 * @return patient
 	 */
 	public Patient getPatient() {
 		return patient;
 	}
 
 	/**
+	 * sets the new patient object to patient in Appointment
+	 * 
 	 * @param patient
 	 */
 	public void setPatient(Patient patient) {
@@ -52,13 +58,16 @@ public class Appointment extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * retrieves the hashMap of procedures
+	 * 
+	 * @return procedures
 	 */
 	public Map<Provider, List<Procedure>> getProcedures() {
 		return procedures;
 	}
 
 	/**
+	 * adds the procedures to the procedure hashMap
 	 * @param provider
 	 * @param procedures
 	 */
@@ -67,6 +76,7 @@ public class Appointment extends Clinic {
 	}
 
 	/**
+	 * sets the passed through hashMap to Appointments procedure hashMap
 	 * @param procedures
 	 */
 	public void setProcedures(Map<Provider, List<Procedure>> procedures) {
@@ -74,13 +84,15 @@ public class Appointment extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * retrieves the localDateTime of Appointment
+	 * @return dateTime
 	 */
 	public LocalDateTime getDateTime() {
 		return dateTime;
 	}
 
 	/**
+	 * sets the localDateTime to dateTime
 	 * @param dateTime
 	 */
 	public void setDateTime(LocalDateTime dateTime) {

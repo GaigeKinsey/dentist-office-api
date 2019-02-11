@@ -232,8 +232,8 @@ public class DentistController {
 	private Clinic searchApointment() {
 		Clinic selectedObject = null;
 
-		LocalDateTime startDateTime = startDate();
-		LocalDateTime endDateTime = endDate();
+		LocalDateTime startDateTime = setDate();
+		LocalDateTime endDateTime = setDate();
 		userInteraction.notifySearchingPatient();
 		Patient patient = (Patient) searchPatient();
 		userInteraction.notifySearchingProvider();
@@ -557,8 +557,8 @@ public class DentistController {
 	}
 
 	private void productionReport() {
-		LocalDateTime startDate = startDate();
-		LocalDateTime endDate = endDate();
+		LocalDateTime startDate = setDate();
+		LocalDateTime endDate = setDate();
 		boolean groupBy = userInteraction.groupBySelection();
 		//total charges for the entire month(s)
 		if (groupBy) {
@@ -583,8 +583,8 @@ public class DentistController {
 	}
 
 	private void collectionReport() {
-		LocalDateTime startDate = startDate();
-		LocalDateTime endDate = endDate();
+		LocalDateTime startDate = setDate();
+		LocalDateTime endDate = setDate();
 		boolean groupBy = userInteraction.groupBySelection();
 		//total money collected for the given month(s)
 		if (groupBy) {
@@ -652,9 +652,9 @@ public class DentistController {
 		currentUser.changePassword(newPass);
 	}
 
-	private LocalDateTime startDate() {
+	private LocalDateTime setDate() {
 
-		LocalDateTime startDate = null;
+		LocalDateTime setDate = null;
 
 		userInteraction.askForStartDate();
 		int year = userInteraction.getYear();
@@ -663,25 +663,8 @@ public class DentistController {
 		int hour = userInteraction.getHour();
 		int minute = userInteraction.getMinute();
 
-		startDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+		setDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
 
-		return startDate;
+		return setDate;
 	}
-
-	private LocalDateTime endDate() {
-
-		LocalDateTime endDate = null;
-
-		userInteraction.askForEndDate();
-		int year = userInteraction.getYear();
-		int month = userInteraction.getMonth();
-		int dayOfMonth = userInteraction.getDayOfMonth(month);
-		int hour = userInteraction.getHour();
-		int minute = userInteraction.getMinute();
-
-		endDate = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
-
-		return endDate;
-	}
-
 }

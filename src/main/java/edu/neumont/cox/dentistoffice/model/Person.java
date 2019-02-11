@@ -18,6 +18,7 @@ public class Person extends Clinic {
 	public Person() {}
 
 	/**
+	 * Overloaded constructor for Person
 	 * @param firstName
 	 * @param lastName
 	 * @param uniqueId

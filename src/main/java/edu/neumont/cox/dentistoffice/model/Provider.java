@@ -14,6 +14,7 @@ public class Provider extends Person {
 	private ProviderType title;
 
 	/**
+	 * Overloaded constructor for Provider
 	 * @param firstName
 	 * @param lastName
 	 * @param uniqueId

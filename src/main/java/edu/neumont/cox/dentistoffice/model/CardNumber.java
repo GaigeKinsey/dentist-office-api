@@ -12,6 +12,7 @@ public class CardNumber extends PaymentCard{
 	private int numberFour;
 	
 	/**
+	 * Overloaded constructor for CardNumber
 	 * @param numberOne
 	 * @param numberTwo
 	 * @param numberThree

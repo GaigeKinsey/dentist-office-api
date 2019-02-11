@@ -19,6 +19,7 @@ public class User extends Clinic{
 	
 
 	/**
+	 * Overloaded Constructor for User
 	 * @param username
 	 * @param password
 	 * @param firstName

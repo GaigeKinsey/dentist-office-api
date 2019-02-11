@@ -20,6 +20,12 @@ public class Procedure extends Appointment {
 	public Procedure() {
 	}
 
+	/**
+	 * Overloaded constructor for Procedure
+	 * @param code
+	 * @param description
+	 * @param cost
+	 */
 	public Procedure(String code, String description, double cost) {
 		this.setCode(code);
 		this.setDescription(description);

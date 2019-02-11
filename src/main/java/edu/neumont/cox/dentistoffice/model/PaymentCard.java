@@ -18,6 +18,7 @@ public class PaymentCard extends Person{
 	public PaymentCard() {}
 	
 	/**
+	 * Overloaded constructor for PaymentCard
 	 * @param cardNumber
 	 * @param expireDate
 	 * @param name

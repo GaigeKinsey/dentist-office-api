@@ -15,6 +15,7 @@ public class Patient extends Person {
 	private PaymentCard paymentCard;
 
 	/**
+	 * Overloaded constructor for Patient
 	 * @param firstName
 	 * @param lastName
 	 * @param uniqueId
