@@ -833,7 +833,7 @@ public class DentistController {
 		if (sortBy) {
 			// Largest patient balance to smallest balance
 			boolean matched = false;
-			
+			//TODO
 		} else {
 			// sorts balance by name
 		}
