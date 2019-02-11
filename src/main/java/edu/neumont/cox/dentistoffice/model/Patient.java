@@ -4,7 +4,7 @@ package edu.neumont.cox.dentistoffice.model;
  * @author Chris and Gaige
  *
  */
-public class Patient extends Person {
+public class Patient extends Person implements Comparable<Patient> {
 
 	/**
 	 * 
@@ -77,9 +77,18 @@ public class Patient extends Person {
 	public void setTotalCharges(Double totalCharges) {
 		this.totalCharges = totalCharges;
 	}
+	
+	public String getPatientWithBalance() {
+		return "Balance due for " + this.getLastName() + ", " + this.getFirstName() + ": " + this.getBalanceDue();
+	}
 
 	@Override
 	public String toString() {
 		return super.toString() + ", " + this.getInsurance().toString();
+	}
+
+	@Override
+	public int compareTo(Patient patient) {
+		return this.getFirstName().compareTo(patient.getFirstName());
 	}
 }

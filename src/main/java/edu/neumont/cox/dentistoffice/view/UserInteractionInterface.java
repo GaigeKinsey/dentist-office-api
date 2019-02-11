@@ -433,5 +433,11 @@ public interface UserInteractionInterface {
 	 * Tells the user that the patient payment record failed
 	 */
 	void recordPaymentFailed();
+
+	/**
+	 * Prints out the patients in order by their sort
+	 * @param patients
+	 */
+	void printSort(List<Patient> patients);
 	
 }

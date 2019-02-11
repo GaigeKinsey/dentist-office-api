@@ -16,8 +16,6 @@ public class Clinic implements Serializable {
 
 	private List<Appointment> appointments = new ArrayList<>();
 
-//	Map<LocalDateTime, Appointment> appointment = new HashMap<>();
-
 	Map<String, User> users = new HashMap<>();
 	Map<String, Provider> providers = new HashMap<>();
 	Map<String, Patient> patients = new HashMap<>();

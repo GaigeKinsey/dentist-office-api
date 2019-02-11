@@ -5,6 +5,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.neumont.cox.dentistoffice.model.Appointment;
@@ -35,12 +36,16 @@ public class DentistController {
 	private Provider recentProvider;
 
 	/**
+	 * Constructor for the controller, an object that implements the UserInteractionInterface
 	 * @param UI
 	 */
 	public DentistController(UserInteractionInterface UI) {
 		this.userInteraction = UI;
 	}
 
+	/**
+	 * Start of the program
+	 */
 	public void run() {
 		try {
 			database.load();
@@ -823,18 +828,36 @@ public class DentistController {
 		}
 	}
 
-	public void patientBalanceReport(boolean sortBy) {
-
+	private void patientBalanceReport(boolean sortBy) {
+		// Turn the patients into an arraylist
+		List<Patient> patients = new ArrayList<>();
+		for (Patient patient : clinic.getPatients().values()) {
+			patients.add(patient);
+		}
+		
 		if (sortBy) {
 			// Largest patient balance to smallest balance
-			boolean matched = false;
-			// TODO
+			Patient tempPatient;
+			// This will loop until all patients have a larger balance than the patient directly in front of it
+			for (int i = 0; i < patients.size(); i++) {
+				// If the current patient has a smaller balance than the one in front of it, then swap them
+				if (patients.get(i).getBalanceDue() < patients.get(i + 1).getBalanceDue()) {
+					tempPatient = patients.get(i);
+					patients.set(i, patients.get(i + 1));
+					patients.set(i + 1, tempPatient);
+					// After swapping, restart the loop
+					i = -1;
+				}
+			}
+			userInteraction.printSort(patients);
 		} else {
 			// sorts balance by name
+			Collections.sort(patients);
+			userInteraction.printSort(patients);
 		}
 	}
 
-	public void collectionsReport(LocalDate startDate, LocalDate endDate, boolean groupBy) {
+	private void collectionsReport(LocalDate startDate, LocalDate endDate, boolean groupBy) {
 		List<Appointment> matchedAppointments = new ArrayList<>();
 		for (Appointment appointment : clinic.getAppointments()) {
 			if (appointment.getDate().isAfter(startDate) && appointment.getDate().isBefore(endDate)) {
