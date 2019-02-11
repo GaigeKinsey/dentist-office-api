@@ -14,327 +14,378 @@ import edu.neumont.cox.dentistoffice.model.User;
 public interface UserInteractionInterface {
 
 	/**
-	 * @return
+	 * Gets the password to be changed to for the Admin on first login
+	 * @return the password they enter
 	 */
 	String adminPasswordChange();
 
 	/**
-	 * 
+	 * Notifies the user they do not have permission to do an action
 	 */
 	void noPermission();
 
 	/**
+	 * Used to prompt for re-entering of password, and checking to see if it matches the original
 	 * @param password
-	 * @return
+	 * @return a boolean representing whether the passwords matches, true if they do, false if not
 	 */
 	boolean checkPassword(String password);
 
 	/**
-	 * 
+	 * Used to notify the user that their passwords did not match
 	 */
 	void passwordMismatch();
 
 	/**
-	 * 
+	 * Welcome message for the program
 	 */
 	void dentistOfficeGreeting();
 
 	/**
-	 * @return
+	 * Displays the main menu of the dentist office
+	 * @return an int representing the user's choice
 	 */
 	int dentistOfficeMenu();
 
 	/**
-	 * @return
+	 * Prompts user for their user name
+	 * @return a String of their response
 	 */
 	String getUsername();
 
 	/**
-	 * @return
+	 * Used when creating a password, makes sure they match
+	 * @return the password after matching verification
 	 */
 	String getPassword();
 
 	/**
-	 * 
+	 * Notifies the User that the password or user name they entered doesn't not match
 	 */
 	void invalidUser();
 
 	/**
-	 * @return
+	 * Displays the menu for adding someone
+	 * @return an int representing the user's choice
 	 */
 	int addSomeoneSubMenu();
 
 	/**
-	 * @return
+	 * Displays the menu for removing someone
+	 * @return an int representing the user's choice
 	 */
 	int removeSomeoneSubMenu();
 
 	/**
-	 * @return
+	 * Displays the menu for generating reports
+	 * @return an int representing the user's choice
 	 */
 	int reportsMenu();
 
 	/**
-	 * @return
+	 * Displays the menu for choosing the user type
+	 * @return an int representing the user's choice
 	 */
 	int userRoleChoice();
 
 	/**
-	 * @return
+	 * Prompts the user for a first name
+	 * @return a String of their response
 	 */
 	String getFirstName();
 
 	/**
-	 * @return
+	 * Prompts user for a last name
+	 * @return a String of their response
 	 */
 	String getLastName();
 
 	/**
-	 * @return
+	 * Prompts the user for a unique ID
+	 * @return an int representing the ID number
 	 */
 	int getUniqueId();
 
 	/**
-	 * @return
+	 * Prompts the user for an email
+	 * @return a String representing the email
 	 */
 	String getEmail();
 
 	/**
-	 * @return
+	 * Prompts the user for a company name
+	 * @return a String representing the company name
 	 */
 	String getCompanyName();
 
 	/**
-	 * @return
+	 * Prompts the user for a group ID
+	 * @return a String representing the group ID
 	 */
 	String getGroupId();
 
 	/**
-	 * @return
+	 * Prompts the user for a member ID
+	 * @return a String representing the member ID;
 	 */
 	String getMemberId();
 
 	/**
-	 * 
+	 * Used to tell the user they are going to enter the insurance provider info
 	 */
 	void insuranceProviderPrompt();
 
 	/**
-	 * 
+	 * Used to tell the user they are going to enter the payment card info
 	 */
 	void paymentCardPrompt();
 
 	/**
-	 * @return
+	 * Prompts the user for their card number
+	 * @return a String representing the card number
 	 */
 	String getCardNumber();
 
 	/**
-	 * @return
+	 * Prompts the user for a card holder name
+	 * @return a String representing the card holder's name
 	 */
 	String getHolderName();
 
 	/**
-	 * @return
+	 * Prompts the user for a CVV number
+	 * @return an int representing the CVV number
 	 */
 	int getCVV();
 
 	/**
-	 * @return
+	 * Prompts the user for a zip code
+	 * @return an int representing the zip code
 	 */
 	int getZipCode();
 
 	/**
-	 * @return
+	 * Prompts the user for a provider type
+	 * @return an int representing the user's choice
 	 */
 	int getProviderType();
 
 	/**
-	 * @return
+	 * Displays the search menu
+	 * @return an int representing the user's choice
 	 */
 	int searchSubMenu();
 
 	/**
-	 * @return
+	 * Used to have the user enter in a password twice to confirm it
+	 * @return a String of the verified password
 	 */
 	String createPassword();
 
 	/**
-	 * @return
+	 * Prompts user for a first name, this field can be blank
+	 * @return a String of their response
 	 */
 	String getSearchFirstName();
 
 	/**
-	 * @return
+	 * Prompts user for a last name, this field can be blank
+	 * @return a String of their response
 	 */
 	String getSearchLastName();
 
 	/**
-	 * @return
+	 * Prompts the user for a user name, this field can be blank
+	 * @return a String of their response
 	 */
 	String getSearchUsername();
 
 	/**
-	 * @return
+	 * Prompts the user for a company name, this field can be blank
+	 * @return a String representing the company name
 	 */
 	String getSearchCompanyName();
 
 	/**
+	 * Displays all the users that match the search criteria
 	 * @param matchedUsers
-	 * @return
+	 * @return an int representing the user they select
 	 */
 	int getUserSearchSelection(List<User> matchedUsers);
 
 	/**
+	 * Displays all the patients that match the search criteria
 	 * @param matchedPatients
-	 * @return
+	 * @return an int representing the patient they select
 	 */
 	int getPatientSearchSelection(List<Patient> matchedPatients);
 
 	/**
+	 * Displays all the providers that match the search criteria
 	 * @param matchedProviders
-	 * @return
+	 * @return an int representing the provider they select
 	 */
 	int getProviderSearchSelection(List<Provider> matchedProviders);
 
 	/**
-	 * @return
+	 * Prompts the user for a phone number
+	 * @return a String representing the phone number
 	 */
 	String getPhoneNumberString();
 
 	/**
-	 * 
+	 * Displays a message telling the user the phone number was invalid
 	 */
 	void invalidPhone();
 
 	/**
-	 * 
+	 * Displays a message telling the user their card was invalid
 	 */
 	void invalidCard();
 
 	/**
-	 * 
+	 * Displays a message telling the user their expiration date was invalid
 	 */
 	void invalidExpireDate();
 
 	/**
-	 * @return
+	 * Displays the menu asking whether the appointment is for new or existing patients
+	 * @return an int representing the user's choice
 	 */
 	int scheduleForPatients();
 
 	/**
-	 * @return
+	 * Prompts the user for an expiration date
+	 * @return a String representing the expiration date
 	 */
 	String getExpireDate();
 
 	/**
-	 * @return
+	 * Prompts the user asking if they want to change their or another user's password
+	 * @return an int representing the user's choice
 	 */
 	int changeUserPassword();
 
 	/**
-	 * @return
+	 * Prompts the user asking if they want to change their password
+	 * @return a boolean, true if they do, false if not
 	 */
 	boolean changePasswordDecision();
 
 	/**
-	 * @return
+	 * Prompts the user for their new password
+	 * @return a String representing their password
 	 */
 	String changePassword();
 
 	/**
-	 * @return
+	 * Prompts the user for a procedure code
+	 * @return a String representing the procedure code
 	 */
 	String getProcedureCode();
 
 	/**
-	 * @return
+	 * Prompts the user for a procedure description
+	 * @return a String representing the procedure description
 	 */
 	String getProcedureDescription();
 
 	/**
-	 * @return
+	 * Prompts the user for the cost of the procedure
+	 * @return a Double representing the cost
 	 */
 	Double getProcedureCost();
 
 	/**
-	 * @return
+	 * Displays the menu asking whether the appointment is for new or existing providers
+	 * @return an int representing their choice
 	 */
 	int scheduleForProviders();
 
 	/**
-	 * @return
+	 * Asks the user if they want to add more procedures
+	 * @return boolean that is true if they want to add more, false if not
 	 */
 	boolean addMoreProcedures();
 
 	/**
-	 * @return
+	 * Prompts the user for a year
+	 * @return an int representing the year
 	 */
 	int getYear();
 
 	/**
-	 * @return
+	 * Prompts the user for a month
+	 * @return an int representing the month
 	 */
 	int getMonth();
 
 	/**
-	 * @return
+	 * Prompts the user for a day of the month
+	 * @param month
+	 * @return an int representing the day of the month
 	 */
 	int getDayOfMonth(int month);
 
 	/**
-	 * @return
+	 * Prompts the user for an hour
+	 * @return an int representing the hour
 	 */
 	int getHour();
 
 	/**
-	 * @return
+	 * Prompts the user for a minute
+	 * @return an int representing the minute
 	 */
 	int getMinute();
 
 	/**
-	 * @return
+	 * Asks the user if they want to add another provider
+	 * @return a boolean that is true if they want to add more, and false if not
 	 */
 	boolean addMoreProviders();
 
 	/**
-	 * 
+	 * Tells the user they are searching for providers
 	 */
 	void notifySearchingProvider();
 
 	/**
-	 * 
+	 * Tells the user they are searching for patients
 	 */
 	void notifySearchingPatient();
 
 	/**
-	 * 
+	 * Notifies the user their appointment date is invalid
 	 */
 	void invalidAppointmentDate();
 
 	/**
+	 * Displays all the appointments that match the appointment search criteria
 	 * @param matchedAppointments
-	 * @return
+	 * @return an int representing the user's chose appointment
 	 */
 	int getAppointmentSearchSelection(List<Appointment> matchedAppointments);
 
 	/**
-	 * 
+	 * Prompts the user for a start date
 	 */
 	void askForStartDate();
 
 	/**
-	 * 
+	 * Prompts the user for an end date
 	 */
 	void askForEndDate();
 
 	/**
-	 * @return
+	 * Asks the user if they want to group reports by month or day
+	 * @return a boolean that is true if month, and false if day
 	 */
 	boolean groupBySelection();
 
 	/**
-	 * @return
+	 * Asks the user if they want to sort by largest to smallest, or by name
+	 * @return a boolean that is true if largest to smallest, and false if by name
 	 */
 	boolean sortBySelection();
 }
