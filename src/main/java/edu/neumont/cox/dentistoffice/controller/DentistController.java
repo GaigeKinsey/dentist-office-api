@@ -839,7 +839,7 @@ public class DentistController {
 			// Largest patient balance to smallest balance
 			Patient tempPatient;
 			// This will loop until all patients have a larger balance than the patient directly in front of it
-			for (int i = 0; i < patients.size(); i++) {
+			for (int i = 0; i < patients.size() - 1; i++) {
 				// If the current patient has a smaller balance than the one in front of it, then swap them
 				if (patients.get(i).getBalanceDue() < patients.get(i + 1).getBalanceDue()) {
 					tempPatient = patients.get(i);
