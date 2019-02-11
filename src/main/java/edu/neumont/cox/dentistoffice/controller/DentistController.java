@@ -560,25 +560,15 @@ public class DentistController {
 		LocalDateTime startDate = setDate();
 		LocalDateTime endDate = setDate();
 		boolean groupBy = userInteraction.groupBySelection();
-		//total charges for the entire month(s)
-		if (groupBy) {
 
-		} else {
-			//total charges for each day(s)
-			
-		}
+		clinic.productionReport(startDate, endDate, groupBy);
 
 	}
 
 	private void patientBalanceReport() {
 		boolean sortBy = userInteraction.sortBySelection();
-		//Largest patient balance to smallest balance
-		if(sortBy) {
-			
-		} else {
-			//sorts balance by name
-			
-		}
+
+		clinic.patientBalanceReport(sortBy);
 
 	}
 
@@ -586,13 +576,9 @@ public class DentistController {
 		LocalDateTime startDate = setDate();
 		LocalDateTime endDate = setDate();
 		boolean groupBy = userInteraction.groupBySelection();
-		//total money collected for the given month(s)
-		if (groupBy) {
 
-		} else {
-			//total money collected for the given day(s)
-		}
-
+		clinic.collectionsReport(startDate, endDate, groupBy);
+		
 	}
 
 	private void userSettings() {

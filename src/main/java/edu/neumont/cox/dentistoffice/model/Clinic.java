@@ -152,8 +152,17 @@ public class Clinic implements Serializable {
 	 * @param endDate
 	 * @param groupBy
 	 */
-	public void productionReport(LocalDate startDate, LocalDate endDate, boolean groupBy) {
+	public void productionReport(LocalDateTime startDate, LocalDateTime endDate, boolean groupBy) {
 
+		//total charges for the entire month(s)
+		if (groupBy) {
+
+		} else {
+			//total charges for each day(s)
+			
+		}
+		
+		
 	}
 
 	/**
@@ -161,8 +170,15 @@ public class Clinic implements Serializable {
 	 * 
 	 * @param sort
 	 */
-	public void patientBalanceReport(boolean sort) {
+	public void patientBalanceReport(boolean sortBy) {
 
+		//Largest patient balance to smallest balance
+		if(sortBy) {
+			
+		} else {
+			//sorts balance by name
+			
+		}
 	}
 
 	/**
@@ -172,8 +188,15 @@ public class Clinic implements Serializable {
 	 * @param endDate
 	 * @param groupBy
 	 */
-	public void collectionsReport(LocalDate startDate, LocalDate endDate, boolean groupBy) {
+	public void collectionsReport(LocalDateTime startDate, LocalDateTime endDate, boolean groupBy) {
 
+		//total money collected for the given month(s)
+		if (groupBy) {
+
+		} else {
+			//total money collected for the given day(s)
+		}
+		
 	}
 
 }
