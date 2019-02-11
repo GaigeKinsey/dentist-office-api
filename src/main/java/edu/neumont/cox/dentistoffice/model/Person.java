@@ -13,7 +13,7 @@ public class Person extends Clinic {
 	private PhoneNumber phone;
 	
 	/**
-	 * 
+	 * Default constructor for Person
 	 */
 	public Person() {}
 
@@ -34,13 +34,14 @@ public class Person extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * @return String firstName
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
+	 * sets the firstName
 	 * @param firstName
 	 */
 	public void setFirstName(String firstName) {
@@ -48,13 +49,14 @@ public class Person extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * @return String lastName
 	 */
 	public String getLastName() {
 		return lastName;
 	}
 
 	/**
+	 * sets the lastName
 	 * @param lastName
 	 */
 	public void setLastName(String lastName) {
@@ -62,13 +64,14 @@ public class Person extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * @return int uniqueId
 	 */
 	public int getUniqueId() {
 		return uniqueId;
 	}
 
 	/**
+	 * sets the uniqueId
 	 * @param uniqueId
 	 */
 	public void setUniqueId(int uniqueId) {
@@ -76,13 +79,14 @@ public class Person extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * @return String email
 	 */
 	public String getEmail() {
 		return email;
 	}
 
 	/**
+	 * sets the email
 	 * @param email
 	 */
 	public void setEmail(String email) {
@@ -90,13 +94,14 @@ public class Person extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * @return PhoneNumber
 	 */
 	public PhoneNumber getPhone() {
 		return phone;
 	}
 
 	/**
+	 * sets the phoneNumber
 	 * @param phone
 	 */
 	public void setPhone(PhoneNumber phone) {

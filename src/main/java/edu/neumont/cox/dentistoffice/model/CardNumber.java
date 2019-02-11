@@ -26,13 +26,14 @@ public class CardNumber extends PaymentCard{
 	}
 
 	/**
-	 * @return
+	 * @return int representing the first 4 digits of the card
 	 */
 	public int getNumberOne() {
 		return numberOne;
 	}
 
 	/**
+	 * Sets the first 4 digits of the card
 	 * @param numberOne
 	 */
 	public void setNumberOne(int numberOne) {
@@ -40,13 +41,14 @@ public class CardNumber extends PaymentCard{
 	}
 
 	/**
-	 * @return
+	 * @return int representing the second 4 digits of the card
 	 */
 	public int getNumberTwo() {
 		return numberTwo;
 	}
 
 	/**
+	 * Sets the second 4 digits of the card
 	 * @param numberTwo
 	 */
 	public void setNumberTwo(int numberTwo) {
@@ -54,13 +56,14 @@ public class CardNumber extends PaymentCard{
 	}
 
 	/**
-	 * @return
+	 * @return int representing the third 4 digits of the card
 	 */
 	public int getNumberThree() {
 		return numberThree;
 	}
 
 	/**
+	 * Sets the third 4 digits of the card
 	 * @param numberThree
 	 */
 	public void setNumberThree(int numberThree) {
@@ -68,13 +71,14 @@ public class CardNumber extends PaymentCard{
 	}
 
 	/**
-	 * @return
+	 * @return int representing the last 4 digits of the card
 	 */
 	public int getNumberFour() {
 		return numberFour;
 	}
 
 	/**
+	 * Sets the last 4 digits of the card
 	 * @param numberFour
 	 */
 	public void setNumberFour(int numberFour) {

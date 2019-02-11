@@ -15,7 +15,7 @@ public class Procedure extends Appointment {
 	private double cost;
 
 	/**
-	 * 
+	 * Default constructor for Procedure
 	 */
 	public Procedure() {
 	}
@@ -33,13 +33,14 @@ public class Procedure extends Appointment {
 	}
 
 	/**
-	 * @return
+	 * @return String code
 	 */
 	public String getCode() {
 		return code;
 	}
 
 	/**
+	 * sets the code
 	 * @param code
 	 */
 	public void setCode(String code) {
@@ -47,13 +48,14 @@ public class Procedure extends Appointment {
 	}
 
 	/**
-	 * @return
+	 * @return String description
 	 */
 	public String getDescription() {
 		return description;
 	}
 
 	/**
+	 * sets the description
 	 * @param description
 	 */
 	public void setDescription(String description) {
@@ -61,13 +63,14 @@ public class Procedure extends Appointment {
 	}
 
 	/**
-	 * @return
+	 * @return double cost
 	 */
 	public double getCost() {
 		return cost;
 	}
 
 	/**
+	 * sets the cost
 	 * @param cost
 	 */
 	public void setCost(double cost) {

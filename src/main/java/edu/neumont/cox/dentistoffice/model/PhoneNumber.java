@@ -11,6 +11,7 @@ public class PhoneNumber extends Person{
 	private int lastFour;
 	
 	/**
+	 * Overloaded constructor for PhoneNumber
 	 * @param firstThree
 	 * @param secondThree
 	 * @param lastFour
@@ -22,13 +23,14 @@ public class PhoneNumber extends Person{
 	}
 
 	/**
-	 * @return
+	 * @return int of first three digits
 	 */
 	public int getFirstThree() {
 		return firstThree;
 	}
 
 	/**
+	 * sets the first three digits
 	 * @param firstThree
 	 */
 	public void setFirstThree(int firstThree) {
@@ -36,13 +38,14 @@ public class PhoneNumber extends Person{
 	}
 
 	/**
-	 * @return
+	 * @return int of second three digits
 	 */
 	public int getSecondThree() {
 		return secondThree;
 	}
 
 	/**
+	 * sets the second three digits
 	 * @param secondThree
 	 */
 	public void setSecondThree(int secondThree) {
@@ -50,13 +53,14 @@ public class PhoneNumber extends Person{
 	}
 
 	/**
-	 * @return
+	 * @return int of last four digits
 	 */
 	public int getLastFour() {
 		return lastFour;
 	}
 
 	/**
+	 * sets the last four digits
 	 * @param lastFour
 	 */
 	public void setLastFour(int lastFour) {

@@ -1,7 +1,7 @@
 package edu.neumont.cox.dentistoffice.model;
 
 /**
- * @author Chris
+ * @author Chris and Gaige
  *
  */
 public class User extends Clinic{
@@ -33,51 +33,9 @@ public class User extends Clinic{
 		this.setLastName(lastName);
 		this.role = role;
 	}
-
-	/**
-	 * @param user
-	 * @return
-	 */
-	public boolean changePasswordForUser(User user) {
-		boolean check = true;
-		if (this.getRole() == UserRole.Administrative) {
-			
-		} else {
-			check = false;
-		}
-		return check;
-	}
 	
 	/**
-	 * @param user
-	 * @return
-	 */
-	public boolean removeUser(User user) {
-		boolean check = true;
-		if (this.getRole() == UserRole.Administrative) {
-			
-		} else {
-			check = false;
-		}
-		return check;
-	}
-	
-	/**
-	 * @param user
-	 * @param role
-	 * @return
-	 */
-	public boolean changeRole(User user, UserRole role) {
-		boolean check = true;
-		if (this.getRole() == UserRole.Administrative) {
-			
-		} else {
-			check = false;
-		}
-		return check;
-	}
-	
-	/**
+	 * sets the user's password
 	 * @param password
 	 */
 	public void changePassword(String password) {
@@ -85,15 +43,16 @@ public class User extends Clinic{
 	}
 	
 	/**
-	 * @return
+	 * @return UserRole role
 	 */
 	public UserRole getRole() {
 		return role;
 	}
 	
 	/**
+	 * sets the user role
 	 * @param role
-	 * @return
+	 * @return boolean true if completed, false if invalid permission
 	 */
 	public boolean setRole(UserRole role) {
 		boolean check = true;
@@ -106,13 +65,14 @@ public class User extends Clinic{
 	}
 
 	/**
-	 * @return
+	 * @return String username
 	 */
 	public String getUsername() {
 		return username;
 	}
 
 	/**
+	 * sets the username
 	 * @param username
 	 */
 	public void setUsername(String username) {
@@ -120,13 +80,14 @@ public class User extends Clinic{
 	}
 
 	/**
-	 * @return
+	 * @return String password
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
+	 * sets the password
 	 * @param password
 	 */
 	public void setPassword(String password) {
@@ -134,13 +95,14 @@ public class User extends Clinic{
 	}
 	
 	/**
-	 * @return
+	 * @return String firstName
 	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
+	 * sets the first name
 	 * @param firstName
 	 */
 	public void setFirstName(String firstName) {
@@ -148,13 +110,14 @@ public class User extends Clinic{
 	}
 
 	/**
-	 * @return
+	 * @return String lastName
 	 */
 	public String getLastName() {
 		return lastName;
 	}
 
 	/**
+	 * sets the last name
 	 * @param lastName
 	 */
 	public void setLastName(String lastName) {

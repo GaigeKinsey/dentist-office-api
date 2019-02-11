@@ -15,6 +15,7 @@ public class InsuranceInfo extends Clinic {
 	private String memberId;
 
 	/**
+	 * Constructor for InsuranceInfo
 	 * @param companyName
 	 * @param groupId
 	 * @param memberId
@@ -26,13 +27,14 @@ public class InsuranceInfo extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * @return String of the company name
 	 */
 	public String getCompanyName() {
 		return companyName;
 	}
 
 	/**
+	 * sets the company name
 	 * @param companyName
 	 */
 	public void setCompanyName(String companyName) {
@@ -40,13 +42,14 @@ public class InsuranceInfo extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * @return String of the groupId
 	 */
 	public String getGroupId() {
 		return groupId;
 	}
 
 	/**
+	 * sets the groupId
 	 * @param groupId
 	 */
 	public void setGroupId(String groupId) {
@@ -54,13 +57,14 @@ public class InsuranceInfo extends Clinic {
 	}
 
 	/**
-	 * @return
+	 * @return String of the memberId
 	 */
 	public String getMemberId() {
 		return memberId;
 	}
 
 	/**
+	 * sets the memberId
 	 * @param memberId
 	 */
 	public void setMemberId(String memberId) {

@@ -29,13 +29,14 @@ public class Provider extends Person {
 	}
 
 	/**
-	 * @return
+	 * @return ProviderType title
 	 */
 	public ProviderType getTitle() {
 		return title;
 	}
 
 	/**
+	 * sets the title
 	 * @param title
 	 */
 	public void setTitle(ProviderType title) {

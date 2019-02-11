@@ -35,13 +35,14 @@ public class Patient extends Person implements Comparable<Patient> {
 	}
 
 	/**
-	 * @return
+	 * @return InsuranceInfo
 	 */
 	public InsuranceInfo getInsurance() {
 		return insurance;
 	}
 
 	/**
+	 * sets the InsuranceInfo
 	 * @param insurance
 	 */
 	public void setInsurance(InsuranceInfo insurance) {
@@ -49,35 +50,53 @@ public class Patient extends Person implements Comparable<Patient> {
 	}
 
 	/**
-	 * @return
+	 * @return PaymentCard
 	 */
 	public PaymentCard getPaymentCard() {
 		return paymentCard;
 	}
 
 	/**
+	 * sets the PaymentCard
 	 * @param paymentCard
 	 */
 	public void setPaymentCard(PaymentCard paymentCard) {
 		this.paymentCard = paymentCard;
 	}
 	
+	/**
+	 * @return balanceDue
+	 */
 	public Double getBalanceDue() {
 		return balanceDue;
 	}
 
+	/**
+	 * sets the balanceDue
+	 * @param balanceDue
+	 */
 	public void setBalanceDue(Double balanceDue) {
 		this.balanceDue = balanceDue;
 	}
 
+	/**
+	 * @return totalCharges
+	 */
 	public Double getTotalCharges() {
 		return totalCharges;
 	}
 
+	/**
+	 * sets the total charges
+	 * @param totalCharges
+	 */
 	public void setTotalCharges(Double totalCharges) {
 		this.totalCharges = totalCharges;
 	}
 	
+	/**
+	 * @return String of the last name, first name, and balanceDue for the patient
+	 */
 	public String getPatientWithBalance() {
 		return "Balance due for " + this.getLastName() + ", " + this.getFirstName() + ": " + this.getBalanceDue();
 	}

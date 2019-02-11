@@ -13,7 +13,7 @@ public class PaymentCard extends Person{
 	private int zipCode;
 	
 	/**
-	 * 
+	 * Default constructor for PaymentCard
 	 */
 	public PaymentCard() {}
 	
@@ -34,13 +34,14 @@ public class PaymentCard extends Person{
 	}
 	
 	/**
-	 * @return
+	 * @return CardNumber
 	 */
 	public CardNumber getCardNumber() {
 		return cardNumber;
 	}
 
 	/**
+	 * sets the CardNumber
 	 * @param cardNumber
 	 */
 	public void setCardNumber(CardNumber cardNumber) {
@@ -48,13 +49,14 @@ public class PaymentCard extends Person{
 	}
 
 	/**
-	 * @return
+	 * @return String of ExpireDate
 	 */
 	public String getExpireDate() {
 		return expireDate;
 	}
 
 	/**
+	 * sets the ExpireDate
 	 * @param expireDate
 	 */
 	public void setExpireDate(String expireDate) {
@@ -62,13 +64,14 @@ public class PaymentCard extends Person{
 	}
 
 	/**
-	 * @return
+	 * @return String of payment card name
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
+	 * sets the payment card name
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -76,13 +79,14 @@ public class PaymentCard extends Person{
 	}
 
 	/**
-	 * @return
+	 * @return int of the cvv
 	 */
 	public int getCvv() {
 		return cvv;
 	}
 
 	/**
+	 * sets the cvv
 	 * @param cvv
 	 */
 	public void setCvv(int cvv) {
@@ -90,13 +94,14 @@ public class PaymentCard extends Person{
 	}
 
 	/**
-	 * @return
+	 * @return int of the zip code
 	 */
 	public int getZipCode() {
 		return zipCode;
 	}
 
 	/**
+	 * sets the zip code
 	 * @param zipCode
 	 */
 	public void setZipCode(int zipCode) {
