@@ -810,7 +810,7 @@ public class DentistController {
 			// total charges for each day(s)
 			for (int i = 1; i <= 31; i++) {
 				boolean matched = false;
-				int total = 0;
+				double total = 0;
 				for (Appointment appointment : clinic.getAppointments()) {
 					if (appointment.getDate().getDayOfMonth() == i) {
 						matched = true;
