@@ -394,7 +394,7 @@ public interface UserInteractionInterface {
 	 * @param i
 	 * @param total
 	 */
-	void printGroup(int i, int total, boolean groupBy);
+	void printGroup(int i, double total, boolean groupBy);
 
 	/**
 	 * Prompts user for procedure code, this can be empty

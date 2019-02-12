@@ -110,7 +110,7 @@ public class Appointment extends Clinic {
 	 * @return a LocalDate of the appointment
 	 */
 	public LocalDate getDate() {
-		return LocalDate.of(dateTime.getDayOfMonth(), dateTime.getMonthValue(), dateTime.getYear());
+		return LocalDate.of(dateTime.getYear(), dateTime.getMonthValue(), dateTime.getDayOfMonth());
 	}
 
 	@Override

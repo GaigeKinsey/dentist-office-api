@@ -791,8 +791,8 @@ public class DentistController {
 		if (groupBy) {
 			for (int i = 1; i <= 12; i++) {
 				boolean matched = false;
-				int total = 0;
-				for (Appointment appointment : clinic.getAppointments()) {
+				double total = 0;
+				for (Appointment appointment : matchedAppointments) {
 					if (appointment.getDate().getMonthValue() == i) {
 						matched = true;
 						for (List<Procedure> procedures : appointment.getProcedures().values()) {
@@ -870,8 +870,8 @@ public class DentistController {
 			for (int i = 1; i <= 12; i++) {
 				boolean matched = false;
 				int total = 0;
-				for (Appointment appointment : clinic.getAppointments()) {
-					if (appointment.getDate().getMonthValue() == i) {
+				for (Appointment appointment : matchedAppointments) {
+					if (appointment.getDateTime().getMonthValue() == i) {
 						if (appointment.getPatient().getTotalCharges() > 0) {
 							total += appointment.getPatient().getTotalCharges();
 							matched = true;
@@ -887,8 +887,8 @@ public class DentistController {
 			for (int i = 1; i <= 31; i++) {
 				boolean matched = false;
 				int total = 0;
-				for (Appointment appointment : clinic.getAppointments()) {
-					if (appointment.getDate().getMonthValue() == i) {
+				for (Appointment appointment : matchedAppointments) {
+					if (appointment.getDateTime().getDayOfMonth() == i) {
 						if (appointment.getPatient().getTotalCharges() > 0) {
 							total += appointment.getPatient().getTotalCharges();
 							matched = true;
