@@ -1,6 +1,8 @@
 package edu.neumont.cox.dentistoffice.model;
 
-public class PaymentCard extends Person{
+import java.io.Serializable;
+
+public class PaymentCard implements Serializable{
 	/**
 	 * 
 	 */
@@ -11,11 +13,6 @@ public class PaymentCard extends Person{
 	private String name;
 	private int cvv;
 	private int zipCode;
-	
-	/**
-	 * Default constructor for PaymentCard
-	 */
-	public PaymentCard() {}
 	
 	/**
 	 * Overloaded constructor for PaymentCard

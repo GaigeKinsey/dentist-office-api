@@ -1,10 +1,12 @@
 package edu.neumont.cox.dentistoffice.model;
 
+import java.io.Serializable;
+
 /**
  * @author Chris and Gaige
  *
  */
-public class Procedure extends Appointment {
+public class Procedure implements Serializable {
 	/**
 	 * 
 	 */
@@ -13,12 +15,6 @@ public class Procedure extends Appointment {
 	private String code;
 	private String description;
 	private double cost;
-
-	/**
-	 * Default constructor for Procedure
-	 */
-	public Procedure() {
-	}
 
 	/**
 	 * Overloaded constructor for Procedure

@@ -1,5 +1,6 @@
 package edu.neumont.cox.dentistoffice.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Map;
  * @author Chris and Gaige
  *
  */
-public class Appointment extends Clinic {
+public class Appointment implements Serializable {
 	/**
 	 * 
 	 */
@@ -19,12 +20,6 @@ public class Appointment extends Clinic {
 	private Patient patient;
 	private Map<Provider, List<Procedure>> procedures = new HashMap<>();
 	private LocalDateTime dateTime;
-
-	/**
-	 * default constructor for Appointment
-	 */
-	public Appointment() {
-	}
 
 	/**
 	 * overloaded constructor for Appointment

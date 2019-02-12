@@ -1,6 +1,8 @@
 package edu.neumont.cox.dentistoffice.model;
 
-public class PhoneNumber extends Person{
+import java.io.Serializable;
+
+public class PhoneNumber implements Serializable{
 	/**
 	 * 
 	 */

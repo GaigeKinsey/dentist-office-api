@@ -36,7 +36,9 @@ public class DentistController {
 	private Provider recentProvider;
 
 	/**
-	 * Constructor for the controller, an object that implements the UserInteractionInterface
+	 * Constructor for the controller, an object that implements the
+	 * UserInteractionInterface
+	 * 
 	 * @param UI
 	 */
 	public DentistController(UserInteractionInterface UI) {
@@ -149,73 +151,65 @@ public class DentistController {
 
 	private void searchMenu() {
 		int searchSelection = userInteraction.searchSubMenu();
-		if (searchSelection != 0) {
-			search(searchSelection);
-		}
-	}
-
-	private Clinic search(int value) {
-		Clinic selectedObject = null;
-		switch (value) {
-		// users
+		switch (searchSelection) {
 		case 1:
-			selectedObject = searchUser();
+			searchUser();
 			break;
-		// Patients
 		case 2:
-			selectedObject = searchPatient();
+			searchPatient();
 			break;
-		// Providers
 		case 3:
-			selectedObject = searchProvider();
+			searchProvider();
 			break;
-
 		case 4:
-			selectedObject = searchApointment();
+			searchApointment();
 			break;
 		}
-		return selectedObject;
 	}
 
-	private Clinic searchUser() {
-		Clinic selectedObject = null;
+	private User searchUser() {
+		User selectedObject = null;
 
 		String firstName = userInteraction.getSearchFirstName();
 		String lastName = userInteraction.getSearchLastName();
 		String username = userInteraction.getSearchUsername();
 		List<User> matchedUsers = meetsUserSearch(firstName, lastName, username);
-		int userSelection = userInteraction.getUserSearchSelection(matchedUsers) - 1;
-		if (userSelection >= 0) {
-			try {
-				selectedObject = matchedUsers.get(userSelection);
-			} catch (NullPointerException npe) {
+		if (matchedUsers.size() != 0) {
+			int userSelection = userInteraction.getUserSearchSelection(matchedUsers) - 1;
+			if (userSelection >= 0) {
+				try {
+					selectedObject = matchedUsers.get(userSelection);
+				} catch (NullPointerException npe) {
+				}
 			}
 		}
 
 		return selectedObject;
 	}
 
-	private Clinic searchPatient() {
-		Clinic selectedObject = null;
+	private Patient searchPatient() {
+		Patient selectedObject = null;
 
 		String firstName = userInteraction.getSearchFirstName();
 		String lastName = userInteraction.getSearchLastName();
 		String companyName = userInteraction.getSearchCompanyName();
 
 		List<Patient> matchedPatients = meetsPatientSearch(firstName, lastName, companyName);
-		int patientSelection = userInteraction.getPatientSearchSelection(matchedPatients) - 1;
-		if (patientSelection >= 0) {
-			try {
-				selectedObject = matchedPatients.get(patientSelection);
-			} catch (NullPointerException npe) {
+		if (matchedPatients.size() != 0) {
+			int patientSelection = userInteraction.getPatientSearchSelection(matchedPatients) - 1;
+			if (patientSelection >= 0) {
+				try {
+					selectedObject = matchedPatients.get(patientSelection);
+				} catch (NullPointerException npe) {
+				}
 			}
 		}
 
 		return selectedObject;
 	}
 
-	private Clinic searchProvider() {
-		Clinic selectedObject = null;
+	private Provider searchProvider() {
+		Provider selectedObject = null;
 
 		String firstName = userInteraction.getSearchFirstName();
 		String lastName = userInteraction.getSearchLastName();
@@ -232,19 +226,21 @@ public class DentistController {
 		}
 
 		List<Provider> matchedProviders = meetsProviderSearch(firstName, lastName, title);
-		int providerSelection = userInteraction.getProviderSearchSelection(matchedProviders) - 1;
-		if (providerSelection >= 0) {
-			try {
-				selectedObject = matchedProviders.get(providerSelection);
-			} catch (NullPointerException npe) {
+		if (matchedProviders.size() != 0) {
+			int providerSelection = userInteraction.getProviderSearchSelection(matchedProviders) - 1;
+			if (providerSelection >= 0) {
+				try {
+					selectedObject = matchedProviders.get(providerSelection);
+				} catch (NullPointerException npe) {
+				}
 			}
 		}
 
 		return selectedObject;
 	}
 
-	private Clinic searchApointment() {
-		Clinic selectedObject = null;
+	private Appointment searchApointment() {
+		Appointment selectedObject = null;
 
 		userInteraction.askForStartDate();
 		LocalDateTime startDateTime = setDateTime();
@@ -278,11 +274,13 @@ public class DentistController {
 
 		List<Appointment> matchedAppointments = meetsAppointmentSearch(startDateTime, endDateTime, patient, provider,
 				procedureCode);
-		int providerSelection = userInteraction.getAppointmentSearchSelection(matchedAppointments) - 1;
-		if (providerSelection >= 0) {
-			try {
-				selectedObject = matchedAppointments.get(providerSelection);
-			} catch (NullPointerException npe) {
+		if (matchedAppointments.size() != 0) {
+			int providerSelection = userInteraction.getAppointmentSearchSelection(matchedAppointments) - 1;
+			if (providerSelection >= 0) {
+				try {
+					selectedObject = matchedAppointments.get(providerSelection);
+				} catch (NullPointerException npe) {
+				}
 			}
 		}
 
@@ -343,7 +341,7 @@ public class DentistController {
 		if (provider == null) {
 			matches = true;
 		} else {
-			if (appointment.getProviders().containsValue(provider)) {
+			if (appointment.getProcedures().keySet().contains(provider)) {
 				matches = true;
 			}
 		}
@@ -355,7 +353,7 @@ public class DentistController {
 		if (patient == null) {
 			matches = true;
 		} else {
-			if (appointment.getPatients().containsValue(patient)) {
+			if (appointment.getPatient().equals(patient)) {
 				matches = true;
 			}
 		}
@@ -389,61 +387,64 @@ public class DentistController {
 				patient = recentPatient;
 			} else {
 				userInteraction.notifySearchingPatient();
-				do {
-					patient = (Patient) searchPatient();
-					if (patient == null) {
-						userInteraction.notifyNoPatient();
-					}
-				} while (patient == null);
+				patient = (Patient) searchPatient();
+				if (patient == null) {
+					userInteraction.notifyNoPatient();
+				}
 			}
-			boolean addingProviders = false;
-			do {
-				// Get the provider
-				Provider provider = null;
-				int providerChoice = userInteraction.scheduleForProviders();
-				if (providerChoice == 1) {
-					addProvider();
-					provider = recentProvider;
-				} else {
-					userInteraction.notifySearchingProvider();
-					do {
+			if (patient != null) {
+				boolean addingProviders = false;
+				do {
+					// Get the provider
+					Provider provider = null;
+					int providerChoice = userInteraction.scheduleForProviders();
+					if (providerChoice == 1) {
+						addProvider();
+						provider = recentProvider;
+					} else {
+						userInteraction.notifySearchingProvider();
 						provider = (Provider) searchProvider();
 						if (provider == null) {
 							userInteraction.notifyNoProvider();
 						}
-					} while (provider == null);
-				}
-				// Get the procedures
-				List<Procedure> procedures = new ArrayList<>();
-				boolean addingProcedures = true;
-				do {
-					String code = userInteraction.getProcedureCode();
-					String description = userInteraction.getProcedureDescription();
-					Double cost = userInteraction.getProcedureCost();
-					totalCost += cost;
-					procedures.add(new Procedure(code, description, cost));
-					addingProcedures = userInteraction.addMoreProcedures();
-				} while (addingProcedures);
-				// Get time
-				LocalDateTime dateTime = null;
-				boolean validTime = false;
-				do {
-					int year = userInteraction.getYear();
-					int month = userInteraction.getMonth();
-					int dayOfMonth = userInteraction.getDayOfMonth(month);
-					int hour = userInteraction.getHour();
-					int minute = userInteraction.getMinute();
-					try {
-						dateTime = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
-						validTime = true;
-					} catch (DateTimeException dte) {
-						userInteraction.invalidAppointmentDate();
 					}
-				} while (!validTime);
-				clinic.getAppointments().add(new Appointment(patient, provider, procedures, dateTime));
-				patient.setBalanceDue(patient.getBalanceDue() + totalCost);
-				addingProviders = userInteraction.addMoreProviders();
-			} while (addingProviders);
+					if (provider != null) {
+
+						// Get the procedures
+						List<Procedure> procedures = new ArrayList<>();
+						boolean addingProcedures = true;
+						do {
+							String code = userInteraction.getProcedureCode();
+							String description = userInteraction.getProcedureDescription();
+							Double cost = userInteraction.getProcedureCost();
+							totalCost += cost;
+							procedures.add(new Procedure(code, description, cost));
+							addingProcedures = userInteraction.addMoreProcedures();
+						} while (addingProcedures);
+						// Get time
+						LocalDateTime dateTime = null;
+						boolean validTime = false;
+						do {
+							int year = userInteraction.getYear();
+							int month = userInteraction.getMonth();
+							int dayOfMonth = userInteraction.getDayOfMonth(month);
+							int hour = userInteraction.getHour();
+							int minute = userInteraction.getMinute();
+							try {
+								dateTime = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+								validTime = true;
+							} catch (DateTimeException dte) {
+								userInteraction.invalidAppointmentDate();
+							}
+						} while (!validTime);
+						clinic.addPatient(patient);
+						clinic.addProvider(provider);
+						clinic.getAppointments().add(new Appointment(patient, provider, procedures, dateTime));
+						patient.setBalanceDue(patient.getBalanceDue() + totalCost);
+						addingProviders = userInteraction.addMoreProviders();
+					}
+				} while (addingProviders);
+			}
 		}
 	}
 
@@ -494,7 +495,15 @@ public class DentistController {
 		// We get the names for each option, might as well get them once here.
 		String firstName = userInteraction.getFirstName();
 		String lastName = userInteraction.getLastName();
-		int uniqueId = userInteraction.getUniqueId();
+		boolean IdMatches = false;
+		int uniqueId = 0;
+		do {
+			uniqueId = userInteraction.getUniqueId();
+			IdMatches = clinic.uniqueIdMatches(uniqueId);
+			if (IdMatches) {
+				userInteraction.notifyMatchingId();
+			}
+		} while (IdMatches);
 		String email = userInteraction.getEmail();
 
 		PhoneNumber phone = getPhoneNumber();
@@ -552,7 +561,7 @@ public class DentistController {
 		case 1:
 			// users
 			if (currentUser.getRole() == UserRole.Administrative) {
-				User user = (User) search(1);
+				User user = searchUser();
 				clinic.getUsers().remove(user.getUsername());
 			} else {
 				userInteraction.noPermission();
@@ -560,12 +569,12 @@ public class DentistController {
 			break;
 		// patient
 		case 2:
-			Patient patient = (Patient) search(2);
+			Patient patient = searchPatient();
 			clinic.getPatients().remove(patient.getLastName());
 			break;
 		// provider
 		case 3:
-			Provider provider = (Provider) search(3);
+			Provider provider = searchProvider();
 			clinic.getProviders().remove(provider.getLastName());
 			break;
 		}
@@ -574,7 +583,7 @@ public class DentistController {
 	private void recordPayment() {
 		userInteraction.askForPatient();
 		try {
-			Patient patient = (Patient) search(2);
+			Patient patient = searchPatient();
 			patient.setTotalCharges(patient.getBalanceDue() + patient.getTotalCharges());
 			patient.setBalanceDue(0.0d);
 		} catch (NullPointerException npe) {
@@ -721,7 +730,7 @@ public class DentistController {
 			break;
 		// Change another user's password
 		case 2:
-			User user = (User) search(1);
+			User user = searchUser();
 			if (user != null) {
 				String newPass = "";
 				boolean valid = false;
@@ -834,13 +843,15 @@ public class DentistController {
 		for (Patient patient : clinic.getPatients().values()) {
 			patients.add(patient);
 		}
-		
+
 		if (sortBy) {
 			// Largest patient balance to smallest balance
 			Patient tempPatient;
-			// This will loop until all patients have a larger balance than the patient directly in front of it
+			// This will loop until all patients have a larger balance than the patient
+			// directly in front of it
 			for (int i = 0; i < patients.size() - 1; i++) {
-				// If the current patient has a smaller balance than the one in front of it, then swap them
+				// If the current patient has a smaller balance than the one in front of it,
+				// then swap them
 				if (patients.get(i).getBalanceDue() < patients.get(i + 1).getBalanceDue()) {
 					tempPatient = patients.get(i);
 					patients.set(i, patients.get(i + 1));

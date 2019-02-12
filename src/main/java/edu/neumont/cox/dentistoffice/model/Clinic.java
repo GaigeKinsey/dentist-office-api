@@ -118,4 +118,14 @@ public class Clinic implements Serializable {
 	public void addProvider(Provider provider) {
 		this.providers.put(provider.getLastName(), provider);
 	}
+
+	public boolean uniqueIdMatches(int uniqueId) {
+		boolean matches = false;
+		for (Patient patient : this.getPatients().values()) {
+			if (patient.getUniqueId() == uniqueId) {
+				matches = true;
+			}
+		}
+		return matches;
+	}
 }

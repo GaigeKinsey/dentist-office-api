@@ -439,5 +439,10 @@ public interface UserInteractionInterface {
 	 * @param patients
 	 */
 	void printSort(List<Patient> patients);
+
+	/**
+	 * Notifies user their Id is not unique
+	 */
+	void notifyMatchingId();
 	
 }

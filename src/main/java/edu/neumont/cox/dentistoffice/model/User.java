@@ -1,10 +1,12 @@
 package edu.neumont.cox.dentistoffice.model;
 
+import java.io.Serializable;
+
 /**
  * @author Chris and Gaige
  *
  */
-public class User extends Clinic{
+public class User implements Serializable{
 	
 	/**
 	 * 

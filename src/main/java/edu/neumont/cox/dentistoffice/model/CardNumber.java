@@ -1,6 +1,8 @@
 package edu.neumont.cox.dentistoffice.model;
 
-public class CardNumber extends PaymentCard{
+import java.io.Serializable;
+
+public class CardNumber implements Serializable{
 	/**
 	 * 
 	 */

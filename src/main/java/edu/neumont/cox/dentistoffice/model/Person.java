@@ -1,6 +1,8 @@
 package edu.neumont.cox.dentistoffice.model;
 
-public class Person extends Clinic {
+import java.io.Serializable;
+
+public class Person implements Serializable {
 	/**
 	 * 
 	 */
@@ -11,11 +13,6 @@ public class Person extends Clinic {
 	private int uniqueId;
 	private String email;
 	private PhoneNumber phone;
-	
-	/**
-	 * Default constructor for Person
-	 */
-	public Person() {}
 
 	/**
 	 * Overloaded constructor for Person
